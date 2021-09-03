@@ -1,2 +1,2 @@
 # SDLgame
-# Petit jeu en SDL en attendant les admissions pour 42
+# Petit jeu en C++ en utlisant SDL et SDL Image en attendant les resultats de 42
