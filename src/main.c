@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <time.h>
 
+
+
 int log_events(){
 	SDL_Event event;
 	if(SDL_PollEvent(&event)){  /* Loop until there are no events left on the queue */
