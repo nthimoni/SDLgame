@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 
-
+Coucou
 
 int log_events(){
 	SDL_Event event;
