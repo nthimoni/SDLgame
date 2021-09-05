@@ -3,16 +3,20 @@
 #include <iostream>
 #include "RenderWindow.hpp"
 
+#define TITLE "SteackOvergame"
+
 int	main(int argc, char *argv[])
 {
-	const char *windowTitle = "SteackOvergame";
 	(void)argc;
 	(void)argv;
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		std::cout << "SDL_init has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
 	if (!IMG_Init(IMG_INIT_PNG))
 		std::cout << "IMG_init has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
-	RenderWindow window(windowTitle, 800, 400);
 
+	RenderWindow window(TITLE, 800, 400);
+	window.cleanUp();
+
+	SDL_Quit();
 	return (0);
 }
