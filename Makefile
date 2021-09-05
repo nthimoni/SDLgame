@@ -1,4 +1,4 @@
-SRC = src/main.cpp
+SRC = src/main.cpp src/RenderWindow.cpp
 OBJ = ${SRC:.cpp=.o}
 INC = include/
 
