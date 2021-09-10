@@ -2,10 +2,7 @@
 #include <SDL2/SDL_image.h>
 #include <iostream>
 #include "RenderWindow.hpp"
-
-#define TITLE "SteackOvergame"
-#define WIN_W 800
-#define Win_H 400
+#include "constantes.hpp"
 
 int	main(int argc, char *argv[])
 {
@@ -16,7 +13,7 @@ int	main(int argc, char *argv[])
 	if (!IMG_Init(IMG_INIT_PNG))
 		std::cout << "IMG_init has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
 
-	RenderWindow window(TITLE, WIN_W, Win_H);
+	RenderWindow window(TITLE, WIN_W, WIN_H);
 
 	bool isRunning = true;
 	SDL_Event event;
