@@ -1,4 +1,4 @@
-SRC = src/main.cpp src/RenderWindow.cpp
+SRC = src/main.cpp src/RenderWindow.cpp src/TileMap.cpp
 OBJ = ${SRC:.cpp=.o}
 INC = include/
 

@@ -5,4 +5,6 @@
 # define WIN_W 800
 # define WIN_H 400
 
+typedef char tile_id;
+
 #endif
