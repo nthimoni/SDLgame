@@ -11,10 +11,10 @@
 #include "TileMap.hpp"
 
 TileMap::TileMap(const char *text_path, const char *tab_path, SDL_Renderer *p_renderer)
-	:text(NULL)
+	:text(NULL), renderer(p_renderer)
 {
 	this->LoadTab(text_path);
-	this->LoadTexture(tab_path, p_renderer);
+	this->LoadTexture(tab_path);
 }
 
 void TileMap::LoadTab(const char *p_path)
@@ -24,32 +24,22 @@ void TileMap::LoadTab(const char *p_path)
 
 	file.open(p_path);
 	if (!file)
-	{
-		std::cout << "Erreur lors de l'ouverture de : " << p_path << '\n';
-	}
+		std::cout << "(LoadTab) Erreur lors de l'ouverture de : " << p_path << '\n';
 	else
-	{
 		while (std::getline(file, buffer))
-		{
 			this->ParseLine(buffer);
-		}
-	}
 }
 
-void TileMap::LoadTexture(const char *p_path, SDL_Renderer *p_renderer)
+void TileMap::LoadTexture(const char *p_path)
 {
 	if (this->text != NULL)
 		SDL_DestroyTexture(this->text);
-	this->text = IMG_LoadTexture(p_renderer, p_path);
+	this->text = IMG_LoadTexture(this->renderer, p_path);
 }
 
-int TileMap::GetNum(unsigned int i, unsigned int j)
+void TileMap::LoadRenderer(SDL_Renderer *p_renderer)
 {
-	if (i > (tab.size() - 1))
-		return (-1);
-	if (j > (tab[i].size() - 1))
-		return (-1);
-	return (this->tab[i][j]);
+	this->renderer = p_renderer;
 }
 
 void TileMap::ParseLine(std::string line)
@@ -64,4 +54,25 @@ void TileMap::ParseLine(std::string line)
 		a = (tile_id)std::atoi(line.c_str());
 		tab[tab.size() - 1].push_back(a);
 	}
+}
+
+void TileMap::Display()
+{
+	SDL_Rect src;
+	SDL_Rect dst;
+
+	src.w = TILE_W;
+	src.h = TILE_H;
+	dst.w = TILE_W;
+	dst.h = TILE_H;
+
+	for (int i = 0 ; i < tab.size() ; i++)
+		for(int a = 0 ; a < tab[i].size() ; a++)
+		{
+			src.x = tab[i][a] % NB_TILE;
+			src.y = tab[i][a] / NB_TILE;
+			dst.x = i * TILE_W;
+			dst.y = a * TILE_H;
+			SDL_RenderCopy(renderer, text, src, dst);
+		}
 }

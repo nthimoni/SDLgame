@@ -14,10 +14,11 @@ class TileMap
 	public:
 		TileMap(const char *text_path, const char *tab_path, SDL_Renderer *p_renderer);
 		void LoadTab(const char *p_path);
-		void LoadTexture(const char *p_path, SDL_Renderer *p_renderer);
-		int GetNum(unsigned int i, unsigned int j);
+		void LoadTexture(const char *p_path);
+		void Display();
 	private:
 		SDL_Texture *text;
+		SDL_Renderer *renderer;
 		std::vector<std::vector<tile_id>> tab;
 		void ParseLine(std::string line);
 };
