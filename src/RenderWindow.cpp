@@ -17,15 +17,25 @@ RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h)
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }
 
-void AddLayer(const char *p_tab, const char *p_text)
+void RenderWindow::AddLayer(const char *p_text, const char *p_tab)
 {
 	layer.push_back(TileMap(p_text, p_tab, this->renderer));
 }
 
 void RenderWindow::PrintMap()
 {
-	for (int i = 0; i < layer.size(); i++)
+	for (unsigned int i = 0; i < layer.size(); i++)
 		layer[i].Display();
+}
+
+void RenderWindow::Clear()
+{
+	SDL_RenderClear(this->renderer);
+}
+
+void RenderWindow::Render()
+{
+	SDL_RenderPresent(this->renderer);
 }
 
 void RenderWindow::cleanUp()

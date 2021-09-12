@@ -12,13 +12,15 @@ class RenderWindow
 {
 	public:
 		RenderWindow(const char *p_title, int p_w, int p_h);
-		void AddLayer(const char *p_tab, const char *p_text);
+		void AddLayer(const char *p_text, const char *p_tab);
 		void PrintMap();
+		void Clear();
+		void Render();
 		void cleanUp();
 	private:
-		std::vector<TileMap> layer;
 		SDL_Window *window;
 		SDL_Renderer *renderer;
+		std::vector<TileMap> layer;
 };
 
 #endif

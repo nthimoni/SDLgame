@@ -15,6 +15,7 @@ class TileMap
 		TileMap(const char *text_path, const char *tab_path, SDL_Renderer *p_renderer);
 		void LoadTab(const char *p_path);
 		void LoadTexture(const char *p_path);
+		void LoadRenderer(SDL_Renderer *p_renderer);
 		void Display();
 	private:
 		SDL_Texture *text;
