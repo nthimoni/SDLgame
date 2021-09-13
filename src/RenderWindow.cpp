@@ -40,5 +40,6 @@ void RenderWindow::Render()
 
 void RenderWindow::cleanUp()
 {
+	SDL_DestroyRenderer(this->renderer);
 	SDL_DestroyWindow(this->window);
 }
