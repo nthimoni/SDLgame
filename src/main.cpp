@@ -5,6 +5,7 @@
 #include <fstream>
 
 #include "RenderWindow.hpp"
+#include "Player.hpp"
 #include "constantes.hpp"
 
 int	main(int argc, char *argv[])
@@ -19,6 +20,7 @@ int	main(int argc, char *argv[])
 
 	RenderWindow window(TITLE, WIN_W, WIN_H);
 	window.AddLayer("assets/tileset.png", "assets/map1.txt");
+	window.LoadPlayer("assets/mainsheet.png");
 
 	bool isRunning = true;
 	SDL_Event event;
@@ -32,9 +34,10 @@ int	main(int argc, char *argv[])
 		}
 		window.Clear();
 		window.PrintMap();
+		window.PrintPlayer();
 		window.Render();
 	}
-	window.cleanUp();
+
 	SDL_Quit();
 	return (0);
 }

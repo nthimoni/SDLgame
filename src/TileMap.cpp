@@ -50,11 +50,11 @@ void TileMap::ParseLine(std::string line)
 	std::string buffer;
 	std::istringstream s_line(line);
 
-	tab.push_back(std::vector<tile_id>());
+	tab.emplace_back();
 	while (std::getline(s_line, buffer, '\t'))
 	{
 		a = (tile_id)std::atoi(buffer.c_str());
-		tab[tab.size() - 1].push_back(a);
+		tab[tab.size() - 1].emplace_back(a);
 	}
 }
 
@@ -78,4 +78,9 @@ void TileMap::Display()
 			dst.y = i * TILE_H;
 			SDL_RenderCopy(renderer, text, &src, &dst);
 		}
+}
+
+TileMap::~TileMap()
+{
+	SDL_DestroyTexture(text);
 }
