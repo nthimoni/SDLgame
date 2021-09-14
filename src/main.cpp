@@ -22,16 +22,8 @@ int	main(int argc, char *argv[])
 	window.AddLayer("assets/tileset.png", "assets/map1.txt");
 	window.LoadPlayer("assets/mainsheet.png");
 
-	bool isRunning = true;
-	SDL_Event event;
-
-	while (isRunning)
+	while (window.Event())
 	{
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT)
-				isRunning = 0;
-		}
 		window.Clear();
 		window.PrintMap();
 		window.PrintPlayer();

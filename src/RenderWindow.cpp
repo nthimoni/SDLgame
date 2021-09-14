@@ -15,7 +15,7 @@ RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h)
 	if (!window)
 		std::cout << "Window failed to init. SDL_ERROR : " << SDL_GetError() << std::endl;
 
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	player.LoadRenderer(renderer);
 }
 
@@ -38,6 +38,11 @@ void RenderWindow::LoadPlayer(const char *sprite)
 void RenderWindow::PrintPlayer()
 {
 	player.display(DOWN, 0);
+}
+
+void RenderWindow::MovePlayer(int x, int y)
+{
+	player.move(x, y);
 }
 
 void RenderWindow::Clear()

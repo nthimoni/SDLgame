@@ -17,6 +17,8 @@ class RenderWindow
 		void LoadPlayer(const char *player_text);
 		void PrintMap();
 		void PrintPlayer();
+		void MovePlayer(int x, int y);
+		bool Event();
 		void Clear();
 		void Render();
 		~RenderWindow();
@@ -25,6 +27,9 @@ class RenderWindow
 		SDL_Renderer *renderer;
 		std::vector<TileMap> layer;
 		Player player;
+	private:
+		bool KeyDown(SDL_Event *event);
+		bool KeyUp(SDL_Event *event);
 };
 
 #endif
