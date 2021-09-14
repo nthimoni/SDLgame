@@ -27,6 +27,7 @@ int	main(int argc, char *argv[])
 		window.Clear();
 		window.PrintMap();
 		window.PrintPlayer();
+		window.MovePlayer();
 		window.Render();
 	}
 

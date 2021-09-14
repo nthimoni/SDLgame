@@ -58,7 +58,7 @@ void TileMap::ParseLine(std::string line)
 	}
 }
 
-void TileMap::Display()
+void TileMap::Display(SDL_Rect *camera)
 {
 	SDL_Rect src;
 	SDL_Rect dst;
@@ -74,8 +74,8 @@ void TileMap::Display()
 
 			src.x = (tab[i][a] % NB_TILE) * TILE_W;
 			src.y = (tab[i][a] / NB_TILE) * TILE_H;
-			dst.x = a * TILE_W;
-			dst.y = i * TILE_H;
+			dst.x = a * TILE_W - camera->x;
+			dst.y = i * TILE_H - camera->y;
 			SDL_RenderCopy(renderer, text, &src, &dst);
 		}
 }

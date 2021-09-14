@@ -4,10 +4,11 @@
 #include <iostream>
 
 #include "Player.hpp"
+#include "tools.hpp"
 #include "constantes.hpp"
 
 Player::Player() 
-	: sprite(NULL), renderer(NULL)
+	: sprite(NULL), renderer(NULL), dir(UP), animState(0)
 {
 	position.x = 0;
 	position.y = 0;
@@ -16,7 +17,7 @@ Player::Player()
 }
 
 Player::Player(const char *path_sprite, SDL_Renderer *p_renderer) 
-	: sprite(NULL), renderer(NULL)
+	: sprite(NULL), renderer(NULL), dir(UP), animState(0)
 {
 	position.x = 0;
 	position.y = 0;
@@ -26,16 +27,21 @@ Player::Player(const char *path_sprite, SDL_Renderer *p_renderer)
 	this->LoadSprite(path_sprite);
 }
 
-void Player::setPosition(int x, int y)
+void Player::setPosition(Vector2 newPos)
 {
-	position.x = x;
-	position.y = y;
+	position.x = newPos.x;
+	position.y = newPos.y;
 }
 
-void Player::move(int x, int y)
+Vector2 Player::getPos()
 {
-	position.x += x;
-	position.y += y;
+	return Vector2(position.x, position.y);
+}
+
+void Player::move(Vector2 nextMove)
+{
+	position.x += nextMove.x;
+	position.y += nextMove.y;
 }
 
 void Player::LoadSprite(const char *path_sprite)
@@ -52,12 +58,23 @@ void Player::LoadRenderer(SDL_Renderer *renderer)
 	this->renderer = renderer;
 }
 
-void Player::display(Direction dir, int state)
+void Player::setDir(Direction dir)
 {
+	 this->dir = dir;
+}
+
+void Player::display(SDL_Rect *camera)
+{
+	(void)camera;
 	SDL_Rect src;
-	src.x = state * PLAYER_W;
+	src.x = animState * PLAYER_W;
 	src.y = dir * PLAYER_H;
 	src.w = PLAYER_W;
 	src.h = PLAYER_H;
-	SDL_RenderCopy(renderer, sprite, &src, &position);
+	SDL_Rect dst;
+	dst.x = position.x - camera->x;
+	dst.y = position.y - camera->y;
+	dst.w = PLAYER_W;
+	dst.h = PLAYER_H;
+	SDL_RenderCopy(renderer, sprite, &src, &dst);
 }

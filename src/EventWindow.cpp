@@ -4,6 +4,8 @@
 #include <iostream>
 
 #include "RenderWindow.hpp"
+#include "Player.hpp"
+#include "tools.hpp"
 
 bool RenderWindow::Event()
 {
@@ -14,14 +16,59 @@ bool RenderWindow::Event()
 		switch (event.type)
 		{
 			case SDL_KEYUP:
-				std::cout << "UP\n";
+				isRunning = this->KeyUp(&event);
 				break;
 			case SDL_KEYDOWN:
-				std::cout << "DOWN\n";
+				isRunning = this->KeyDown(&event);
 				break;
 			case SDL_QUIT:
-				isRunning = false;
+				return false;
 				break;
 		}
 	return isRunning;
-} 
+}
+
+bool RenderWindow::KeyDown(SDL_Event *event)
+{
+	switch (event->key.keysym.sym)
+	{
+		case SDLK_z:
+			keys[KEY::Z] = 1;
+			break;
+		case SDLK_q:
+			keys[KEY::Q] = 1;
+			break;
+		case SDLK_d:
+			keys[KEY::D] = 1;
+			break;
+		case SDLK_s:
+			keys[KEY::S] = 1;
+			break;
+	}
+	return true;
+}
+
+bool RenderWindow::KeyUp(SDL_Event *event)
+{
+	switch (event->key.keysym.sym)
+	{
+		case SDLK_z:
+			keys[KEY::Z] = 0;
+			break;
+		case SDLK_q:
+			keys[KEY::Q] = 0;
+			break;
+		case SDLK_d:
+			keys[KEY::D] = 0;
+			break;
+		case SDLK_s:
+			keys[KEY::S] = 0;
+			break;
+	}
+	return true;
+}
+
+bool RenderWindow::isPressed(int indice)
+{
+	return keys[indice];
+}

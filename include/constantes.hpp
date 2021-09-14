@@ -15,5 +15,6 @@ typedef char tile_id;
 // Info Player
 #define PLAYER_W 77
 #define PLAYER_H 77
+#define PLAYER_VEL 3
 
 #endif

@@ -5,6 +5,7 @@
 #include <SDL2/SDL_image.h>
 
 #include "Player.hpp"
+#include "tools.hpp"
 
 enum Direction {DOWN, LEFT, RIGHT, UP};
 
@@ -13,15 +14,19 @@ class Player
 	public:
 		Player(const char *path_sprite, SDL_Renderer *renderer);
 		Player();
-		void setPosition(int x, int y);
-		void move(int x, int y);
-		void display(Direction dir, int anim);
+		void setPosition(Vector2 newPos);
+		void move(Vector2 nextMove);
+		void display(SDL_Rect *camera);
 		void LoadSprite(const char *path_sprite);
 		void LoadRenderer(SDL_Renderer *renderer);
+		Vector2 getPos();
+		void setDir(Direction dir);
 	private:
+		SDL_Rect position;
 		SDL_Texture *sprite;
 		SDL_Renderer *renderer;
-		SDL_Rect position;
+		Direction dir;
+		int animState;
 };
 
 #endif
