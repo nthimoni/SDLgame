@@ -28,17 +28,20 @@ class RenderWindow
 		void LoadPlayer(const char *player_text);
 		void PrintMap();
 		void PrintPlayer();
-		void MovePlayer();
+		void MovePlayer(unsigned int step);
 		bool Event();
 		bool isPressed(int indice);
 		void Clear();
 		void Render();
 		void setCamera(Vector2 *pos);
+		void LoadBackground(const char *bgtext);
+		void PrintBackground();
 		~RenderWindow();
 	private:
 		SDL_Rect camera;
 		SDL_Window *window;
 		SDL_Renderer *renderer;
+		SDL_Texture *background;
 		std::vector<TileMap> layer;
 		Player player;
 		std::vector<bool> keys;

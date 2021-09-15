@@ -44,6 +44,24 @@ void Player::move(Vector2 nextMove)
 	position.y += nextMove.y;
 }
 
+void Player::updateAnim(unsigned int step)
+{
+	animTime += step;
+	if (animTime >= STEP_ANIM)
+	{
+		animState++;
+		animTime = 0;
+	}
+	if (animState == NB_SPRITE_LINE)
+		animState = 0;
+
+}
+
+void Player::setAnim(int animState)
+{
+	this->animState = animState;
+}
+
 void Player::LoadSprite(const char *path_sprite)
 {
 	if (sprite != NULL)

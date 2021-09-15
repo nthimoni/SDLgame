@@ -7,6 +7,7 @@
 #include "RenderWindow.hpp"
 #include "TileMap.hpp"
 #include "Player.hpp"
+#include "tools.hpp"
 
 RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h)
 	: window(NULL), renderer(NULL), keys(4, false)
@@ -21,7 +22,6 @@ RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h)
 	camera.y = 0;
 	camera.w = WIN_W;
 	camera.h = WIN_H;
-
 }
 
 void RenderWindow::AddLayer(const char *p_text, const char *p_tab)
@@ -45,28 +45,34 @@ void RenderWindow::PrintPlayer()
 	player.display(&camera);
 }
 
-void RenderWindow::MovePlayer()
+void RenderWindow::MovePlayer(unsigned int step)
 {
 	if (keys[KEY::Z])
 	{
 		player.move(Vector2(0, -PLAYER_VEL));
 		player.setDir(UP);
 	}
-	if (keys[KEY::Q])
-	{
-		player.move(Vector2(-PLAYER_VEL, 0));
-		player.setDir(LEFT);
-	}
 	if (keys[KEY::S])
 	{
 		player.move(Vector2(0, PLAYER_VEL));
 		player.setDir(DOWN);
+	}
+	if (keys[KEY::Q])
+	{
+		player.move(Vector2(-PLAYER_VEL, 0));
+		player.setDir(LEFT);
 	}
 	if (keys[KEY::D])
 	{
 		player.move(Vector2(PLAYER_VEL, 0));
 		player.setDir(RIGHT);
 	}
+	if (XOR(keys[KEY::D], keys[KEY::Q]))
+		player.updateAnim(step);
+	else if (XOR(keys[KEY::Z], keys[KEY::S]))
+		player.updateAnim(step);
+	else
+		player.setAnim(SPRITE_NEUTRE);
 
 	Vector2 cameraPos(player.getPos().x + PLAYER_W / 2 - WIN_W / 2 ,
 						player.getPos().y + PLAYER_H / 2 - WIN_H / 2);
@@ -89,8 +95,23 @@ void RenderWindow::setCamera(Vector2 *pos)
 	camera.y = pos->y;
 }
 
+void RenderWindow::LoadBackground(const char *bgtext)
+{
+	if (background != NULL)
+		SDL_DestroyTexture(background);
+	background = IMG_LoadTexture(this->renderer, bgtext);
+	if (background == NULL)
+		std::cout << "Erreur lors du chargement de " << bgtext << '\n';
+}
+
+void RenderWindow::PrintBackground()
+{
+	SDL_RenderCopy(this->renderer, this->background, NULL, NULL);
+}
+
 RenderWindow::~RenderWindow()
 {
 	SDL_DestroyRenderer(this->renderer);
 	SDL_DestroyWindow(this->window);
+	SDL_DestroyTexture(this->background);
 }

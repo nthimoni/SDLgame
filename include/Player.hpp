@@ -16,6 +16,8 @@ class Player
 		Player();
 		void setPosition(Vector2 newPos);
 		void move(Vector2 nextMove);
+		void updateAnim(unsigned int anim);
+		void setAnim(int animState);
 		void display(SDL_Rect *camera);
 		void LoadSprite(const char *path_sprite);
 		void LoadRenderer(SDL_Renderer *renderer);
@@ -26,6 +28,7 @@ class Player
 		SDL_Texture *sprite;
 		SDL_Renderer *renderer;
 		Direction dir;
+		unsigned int animTime;
 		int animState;
 };
 

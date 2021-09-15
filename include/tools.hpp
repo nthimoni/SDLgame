@@ -10,4 +10,6 @@ class Vector2
 		int y;
 };
 
+bool XOR(bool a, bool b);
+
 #endif
