@@ -19,6 +19,7 @@ TileMap::TileMap(const char *text_path, const char *tab_path, SDL_Renderer *p_re
 
 void TileMap::LoadTab(const char *p_path)
 {
+	tab.clear();
 	std::fstream file(p_path);
 	std::string buffer;
 

@@ -64,6 +64,9 @@ bool RenderWindow::KeyUp(SDL_Event *event)
 		case SDLK_s:
 			keys[KEY::S] = 0;
 			break;
+		case SDLK_e:
+			this->layer[0].LoadTab("assets/map1.txt");
+			break;
 	}
 	return true;
 }
