@@ -20,7 +20,7 @@ TileMap::TileMap(const char *text_path, const char *tab_path, SDL_Renderer *p_re
 void TileMap::LoadTab(const char *p_path)
 {
 	tab.clear();
-	std::fstream file(p_path);
+	std::ifstream file(p_path);
 	std::string buffer;
 
 	if (!file.is_open())
@@ -57,6 +57,17 @@ void TileMap::ParseLine(std::string line)
 		a = (tile_id)std::atoi(buffer.c_str());
 		tab[tab.size() - 1].emplace_back(a);
 	}
+}
+
+tile_id TileMap::Get(int x, int y)
+{
+	if (x < 0 || y < 0)
+		return 0;
+	if ((unsigned int)y >= tab.size())
+		return 0;
+	if ((unsigned int)x >= tab[y].size())
+		return 0;
+	return tab[y][x];
 }
 
 void TileMap::Display(SDL_Rect *camera)

@@ -10,15 +10,18 @@
 # define NB_TILE 10 // Number of tile on each line of tileset
 # define TILE_W 32
 # define TILE_H 32
-typedef unsigned char tile_id;
+# define MAX_TILE 300
+typedef short int tile_id;
 
 // Info Player
-#define PLAYER_W 77
-#define PLAYER_H 77
+#define PLAYER_W 37
+#define PLAYER_H 62
 #define PLAYER_VEL 3
-
+#define JUMP_TIME_MAX 350
+#define JUMP_VEL 3
+#define GRAVITY_VEL 5
 #define NB_SPRITE_LINE 8
 #define SPRITE_NEUTRE 7
-#define STEP_ANIM 110
+#define STEP_ANIM 100
 
 #endif

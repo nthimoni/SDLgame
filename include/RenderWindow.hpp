@@ -34,6 +34,8 @@ class RenderWindow
 		void Clear();
 		void Render();
 		void setCamera(Vector2 *pos);
+		void setCameraX(int x);
+		void setCameraY(int y);
 		void LoadBackground(const char *bgtext);
 		void PrintBackground();
 		~RenderWindow();

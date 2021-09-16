@@ -38,6 +38,7 @@ void RenderWindow::PrintMap()
 void RenderWindow::LoadPlayer(const char *sprite)
 {
 	player.LoadSprite(sprite);
+	player.setCollision();
 }
 
 void RenderWindow::PrintPlayer()
@@ -47,36 +48,35 @@ void RenderWindow::PrintPlayer()
 
 void RenderWindow::MovePlayer(unsigned int step)
 {
-	if (keys[KEY::Z])
-	{
-		player.move(Vector2(0, -PLAYER_VEL));
-		player.setDir(UP);
-	}
-	if (keys[KEY::S])
-	{
-		player.move(Vector2(0, PLAYER_VEL));
-		player.setDir(DOWN);
-	}
 	if (keys[KEY::Q])
 	{
-		player.move(Vector2(-PLAYER_VEL, 0));
+		player.move(Vector2(-PLAYER_VEL, 0), &layer);
 		player.setDir(LEFT);
 	}
 	if (keys[KEY::D])
 	{
-		player.move(Vector2(PLAYER_VEL, 0));
+		player.move(Vector2(PLAYER_VEL, 0), &layer);
 		player.setDir(RIGHT);
 	}
+	
+	int tempRestant = player.isJumping(step);
+	if (!tempRestant)
+	{
+		if (!player.move(Vector2(0, GRAVITY_VEL), &layer))
+			if (keys[KEY::Z])
+				player.jump();
+	}
+	else
+		player.move(Vector2(0, -JUMP_VEL * tempRestant / 100), &layer);
+	
+	// ANIMATION
 	if (XOR(keys[KEY::D], keys[KEY::Q]))
-		player.updateAnim(step);
-	else if (XOR(keys[KEY::Z], keys[KEY::S]))
 		player.updateAnim(step);
 	else
 		player.setAnim(SPRITE_NEUTRE);
-
-	Vector2 cameraPos(player.getPos().x + PLAYER_W / 2 - WIN_W / 2 ,
-						player.getPos().y + PLAYER_H / 2 - WIN_H / 2);
-	this->setCamera(&cameraPos);
+	
+	// CAMERA
+	this->setCameraX(player.getPos().x + PLAYER_W / 2 - WIN_W / 2);
 }
 
 void RenderWindow::Clear()
@@ -93,6 +93,14 @@ void RenderWindow::setCamera(Vector2 *pos)
 {
 	camera.x = pos->x;
 	camera.y = pos->y;
+}
+void RenderWindow::setCameraX(int x)
+{
+	camera.x = x;
+}
+void RenderWindow::setCameraY(int y)
+{
+	camera.y = y;
 }
 
 void RenderWindow::LoadBackground(const char *bgtext)

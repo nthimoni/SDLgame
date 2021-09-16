@@ -2,13 +2,16 @@
 #include <SDL2/SDL_image.h>
 
 #include <iostream>
+#include <limits>
+#include <array>
 
 #include "Player.hpp"
+#include "TileMap.hpp"
 #include "tools.hpp"
 #include "constantes.hpp"
 
 Player::Player() 
-	: sprite(NULL), renderer(NULL), dir(UP), animState(0)
+	: sprite(NULL), renderer(NULL), dir(UP), animState(0), dur(MAX_TILE, false), jumpTime(-1)
 {
 	position.x = 0;
 	position.y = 0;
@@ -17,7 +20,7 @@ Player::Player()
 }
 
 Player::Player(const char *path_sprite, SDL_Renderer *p_renderer) 
-	: sprite(NULL), renderer(NULL), dir(UP), animState(0)
+	: sprite(NULL), renderer(NULL), dir(UP), animState(0), dur(MAX_TILE, false), jumpTime(-1)
 {
 	position.x = 0;
 	position.y = 0;
@@ -25,6 +28,14 @@ Player::Player(const char *path_sprite, SDL_Renderer *p_renderer)
 	position.h = PLAYER_H;
 	this->renderer = p_renderer;
 	this->LoadSprite(path_sprite);
+}
+
+void Player::setCollision()
+{
+	std::array<tile_id, 3> tiles = {1, 2, 3};
+
+	for (unsigned int i = 0; i < tiles.size(); i++)
+		dur[tiles[i]] = true;
 }
 
 void Player::setPosition(Vector2 newPos)
@@ -38,10 +49,27 @@ Vector2 Player::getPos()
 	return Vector2(position.x, position.y);
 }
 
-void Player::move(Vector2 nextMove)
+bool Player::move(Vector2 nextMove, std::vector<TileMap> *layer)
 {
 	position.x += nextMove.x;
 	position.y += nextMove.y;
+	int MinX = position.x / TILE_W;
+	int MinY = position.y / TILE_H;
+	int MaxX = (position.x + PLAYER_W) / TILE_W;
+	int MaxY = (position.y + PLAYER_H) / TILE_W;
+	for (int i = MinX; i <= MaxX; i++)
+		for (int u = MinY; u <= MaxY; u++)
+		{
+			SDL_Rect tile{i * TILE_W, u * TILE_H, TILE_W, TILE_H};
+			for (unsigned int x = 0; x < (*layer).size(); x++)
+			if (SDL_HasIntersection(&position, &tile) && dur[(*layer)[x].Get(i, u)])
+			{
+				position.x -= nextMove.x;
+				position.y -= nextMove.y;
+				return false;
+			}
+		}
+	return true;
 }
 
 void Player::updateAnim(unsigned int step)
@@ -81,12 +109,28 @@ void Player::setDir(Direction dir)
 	 this->dir = dir;
 }
 
+int Player::isJumping(unsigned int step)
+{
+	if (jumpTime > -1 && jumpTime < JUMP_TIME_MAX)
+	{
+		jumpTime += step;
+		return JUMP_TIME_MAX - jumpTime;
+	}
+	else if (jumpTime >= JUMP_TIME_MAX)
+		jumpTime = -1;
+	return 0;
+}
+
+void Player::jump()
+{
+	if (jumpTime < 0)
+		jumpTime = 0;
+}
 void Player::display(SDL_Rect *camera)
 {
-	(void)camera;
 	SDL_Rect src;
-	src.x = animState * PLAYER_W;
-	src.y = dir * PLAYER_H;
+	src.x = animState * (PLAYER_W + 40) + 20;
+	src.y = dir * (PLAYER_H + 15) + 15;
 	src.w = PLAYER_W;
 	src.h = PLAYER_H;
 	SDL_Rect dst;
