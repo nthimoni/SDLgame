@@ -19,6 +19,8 @@ class Player
 		Player();
 		void setPosition(Vector2 newPos);
 		bool move(Vector2 nextMove, std::vector<TileMap> *layer);
+		bool moveX(int x, std::vector<TileMap> *layer);
+		bool moveY(int y, std::vector<TileMap> *layer);
 		void updateAnim(unsigned int anim);
 		void setAnim(int animState);
 		void display(SDL_Rect *camera);
@@ -29,6 +31,7 @@ class Player
 		void setCollision();
 		int isJumping(unsigned int step);
 		void jump();
+		void stopJump();
 	private:
 		SDL_Rect position;
 		SDL_Texture *sprite;

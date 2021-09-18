@@ -33,6 +33,7 @@ int	main(int argc, char *argv[])
 		current = SDL_GetTicks();
 		step = current - previous;
 		previous = current;
+		std::cout << step << std::endl;
 		window.Clear();
 		window.PrintBackground();
 		window.PrintMap();

@@ -4,6 +4,8 @@
 #include <iostream>
 #include <limits>
 #include <array>
+#include <math.h>
+#include <stdlib.h>
 
 #include "Player.hpp"
 #include "TileMap.hpp"
@@ -51,25 +53,149 @@ Vector2 Player::getPos()
 
 bool Player::move(Vector2 nextMove, std::vector<TileMap> *layer)
 {
-	position.x += nextMove.x;
-	position.y += nextMove.y;
-	int MinX = position.x / TILE_W;
-	int MinY = position.y / TILE_H;
-	int MaxX = (position.x + PLAYER_W) / TILE_W;
-	int MaxY = (position.y + PLAYER_H) / TILE_W;
-	for (int i = MinX; i <= MaxX; i++)
-		for (int u = MinY; u <= MaxY; u++)
+	if (nextMove.x == 0)
+		return this->moveY(nextMove.y, layer);
+	if (nextMove.y == 0)
+		return this->moveX(nextMove.x, layer);
+	int x = 0;
+	int y = 0;
+	int MinX = 0;
+	int MinY = 0;
+	int MaxX = 0;
+	int MaxY = 0;
+	char signX = 0;
+	char signY = 0;
+	nextMove.x < 0 ? signX-- : signX++;
+	nextMove.y < 0 ? signY-- : signY++;
+	nextMove.x = abs(nextMove.x);
+	nextMove.y = abs(nextMove.y);
+	if (nextMove.x > nextMove.y)
+	{
+		for (int r = 1; r <= nextMove.x; r++)
 		{
-			SDL_Rect tile{i * TILE_W, u * TILE_H, TILE_W, TILE_H};
-			for (unsigned int x = 0; x < (*layer).size(); x++)
-			if (SDL_HasIntersection(&position, &tile) && dur[(*layer)[x].Get(i, u)])
-			{
-				position.x -= nextMove.x;
-				position.y -= nextMove.y;
-				return false;
-			}
+			x = position.x + r * signX;
+			y = position.y + ((int)round((float)r/(nextMove.x/nextMove.y))) * signY;
+			MinX = x / TILE_W;
+			MinY = y / TILE_H;
+			MaxX = (x + PLAYER_W) / TILE_W;
+			MaxY = (y + PLAYER_H) / TILE_W;
+			for (int i = MinX; i <= MaxX; i++)
+				for (int u = MinY; u <= MaxY; u++)
+				{
+					for (unsigned int e = 0; e < (*layer).size(); e++)
+						if (dur[(*layer)[e].Get(i, u)])
+						{
+							if (r == 1)
+								return (false);
+							else
+							{
+								position.x += (r - 1) * signX;
+								position.y += ((int)round((float)(r - 1)/(nextMove.x/nextMove.y))) * signY;
+								return (true);
+							}
+						}
+				}
 		}
-	return true;
+		position.x = x;
+		position.y = y;
+	}
+	else
+	{
+		for (int r = 1; r <= nextMove.y; r++)
+		{
+			y = position.y + r * signY;
+			x = position.x + ((int)round((float)r/(nextMove.y/nextMove.x))) * signX;
+			MinX = x / TILE_W;
+			MinY = y / TILE_H;
+			MaxX = (x + PLAYER_W) / TILE_W;
+			MaxY = (y + PLAYER_H) / TILE_W;
+			for (int i = MinX; i <= MaxX; i++)
+				for (int u = MinY; u <= MaxY; u++)
+				{
+					for (unsigned int e = 0; e < (*layer).size(); e++)
+						if (dur[(*layer)[e].Get(i, u)])
+						{
+							if (r == 1)
+								return (false);
+							else
+							{
+								position.y += (r - 1) * signY;
+								position.x += ((int)round((float)(r - 1)/(nextMove.y/nextMove.x))) * signX;
+								return (true);
+							}
+						}
+				}
+		}
+		position.x = x;
+		position.y = y;
+	}
+	return (true);
+}
+
+bool Player::moveX(int x, std::vector<TileMap> *layer)
+{
+	int MinX = 0;
+	int MinY = 0;
+	int MaxX = 0;
+	int MaxY = 0;
+	char signX = 0;
+	x < 0 ? signX-- : signX++;
+	for (int t = 0 ; t < abs(x) ; t++)
+	{
+		position.x += 1 * signX;
+		MinX = position.x / TILE_W;
+		MinY = position.y / TILE_H;
+		MaxX = (position.x + PLAYER_W) / TILE_W;
+		MaxY = (position.y + PLAYER_H) / TILE_W;
+		for (int i = MinX; i <= MaxX; i++)
+			for (int u = MinY; u <= MaxY; u++)
+			{
+				for (unsigned int e = 0; e < (*layer).size(); e++)
+					if (dur[(*layer)[e].Get(i, u)])
+					{
+						position.x -= 1 * signX;
+						if (t == 0)
+							return (false);
+						else
+							return (true);
+					}
+			}
+
+	}
+	return (true);
+}
+
+bool Player::moveY(int y, std::vector<TileMap> *layer)
+{
+	int MinX = 0;
+	int MinY = 0;
+	int MaxX = 0;
+	int MaxY = 0;
+	char signY = 0;
+	y < 0 ? signY-- : signY++;
+	for (int t = 0 ; t < abs(y) ; t++)
+	{
+		position.y += 1 * signY;
+		MinX = position.x / TILE_W;
+		MinY = position.y / TILE_H;
+		MaxX = (position.x + PLAYER_W) / TILE_W;
+		MaxY = (position.y + PLAYER_H) / TILE_W;
+		for (int i = MinX; i <= MaxX; i++)
+			for (int u = MinY; u <= MaxY; u++)
+			{
+				for (unsigned int e = 0; e < (*layer).size(); e++)
+					if (dur[(*layer)[e].Get(i, u)])
+					{
+						position.y -= 1 * signY;
+						if (t == 0)
+							return (false);
+						else
+							return (true);
+					}
+			}
+
+	}
+	return (true);
 }
 
 void Player::updateAnim(unsigned int step)
@@ -106,7 +232,7 @@ void Player::LoadRenderer(SDL_Renderer *renderer)
 
 void Player::setDir(Direction dir)
 {
-	 this->dir = dir;
+	this->dir = dir;
 }
 
 int Player::isJumping(unsigned int step)
@@ -139,4 +265,9 @@ void Player::display(SDL_Rect *camera)
 	dst.w = PLAYER_W;
 	dst.h = PLAYER_H;
 	SDL_RenderCopy(renderer, sprite, &src, &dst);
+}
+
+void Player::stopJump()
+{
+	this->jumpTime = -1;
 }

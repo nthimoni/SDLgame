@@ -67,7 +67,8 @@ void RenderWindow::MovePlayer(unsigned int step)
 				player.jump();
 	}
 	else
-		player.move(Vector2(0, -JUMP_VEL * tempRestant / 100), &layer);
+		if (!player.move(Vector2(0, -JUMP_VEL * tempRestant / 100), &layer))
+			player.stopJump();
 	
 	// ANIMATION
 	if (XOR(keys[KEY::D], keys[KEY::Q]))

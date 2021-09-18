@@ -11,5 +11,4 @@ class Vector2
 };
 
 bool XOR(bool a, bool b);
-
 #endif

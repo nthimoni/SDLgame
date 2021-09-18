@@ -33,16 +33,16 @@ bool RenderWindow::KeyDown(SDL_Event *event)
 	switch (event->key.keysym.sym)
 	{
 		case SDLK_z:
-			keys[KEY::Z] = 1;
+			keys[KEY::Z] = true;
 			break;
 		case SDLK_q:
-			keys[KEY::Q] = 1;
+			keys[KEY::Q] = true;
 			break;
 		case SDLK_d:
-			keys[KEY::D] = 1;
+			keys[KEY::D] = true;
 			break;
 		case SDLK_s:
-			keys[KEY::S] = 1;
+			keys[KEY::S] = true;
 			break;
 	}
 	return true;
