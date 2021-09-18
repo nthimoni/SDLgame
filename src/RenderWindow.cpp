@@ -48,6 +48,29 @@ void RenderWindow::PrintPlayer()
 
 void RenderWindow::MovePlayer(unsigned int step)
 {
+	bool falling = false;
+	if (player.isOnLadder(&layer))
+	{
+		player.stopJump();
+
+		if (keys[KEY::Z])
+			player.move(Vector2(0, -PLAYER_VEL), &layer);
+	}
+	else
+	{
+		int tempRestant = player.isJumping(step);
+		if (!tempRestant)
+		{
+			falling = player.fall(&layer);
+			if (!falling)
+				if (keys[KEY::Z])
+					player.jump();
+		}
+		else
+			if (!player.move(Vector2(0, -JUMP_VEL * tempRestant / 100), &layer))
+				player.stopJump();
+	}
+
 	if (keys[KEY::Q])
 	{
 		player.move(Vector2(-PLAYER_VEL, 0), &layer);
@@ -58,24 +81,15 @@ void RenderWindow::MovePlayer(unsigned int step)
 		player.move(Vector2(PLAYER_VEL, 0), &layer);
 		player.setDir(RIGHT);
 	}
-	
-	int tempRestant = player.isJumping(step);
-	if (!tempRestant)
-	{
-		if (!player.move(Vector2(0, GRAVITY_VEL), &layer))
-			if (keys[KEY::Z])
-				player.jump();
-	}
-	else
-		if (!player.move(Vector2(0, -JUMP_VEL * tempRestant / 100), &layer))
-			player.stopJump();
-	
+	if (keys[KEY::S] && !falling)
+		player.move(Vector2(0, PLAYER_VEL), &layer);
+
 	// ANIMATION
 	if (XOR(keys[KEY::D], keys[KEY::Q]))
 		player.updateAnim(step);
 	else
 		player.setAnim(SPRITE_NEUTRE);
-	
+
 	// CAMERA
 	this->setCameraX(player.getPos().x + PLAYER_W / 2 - WIN_W / 2);
 }

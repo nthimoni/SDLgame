@@ -32,6 +32,8 @@ class Player
 		int isJumping(unsigned int step);
 		void jump();
 		void stopJump();
+		bool isOnLadder(std::vector<TileMap> *layer);
+		bool fall(std::vector<TileMap> *layer);
 	private:
 		SDL_Rect position;
 		SDL_Texture *sprite;
@@ -39,7 +41,8 @@ class Player
 		Direction dir;
 		unsigned int animTime;
 		int animState;
-		std::vector<int> dur;
+		std::vector<bool> dur;
+		std::vector<bool> ladder;
 		int jumpTime;
 };
 
