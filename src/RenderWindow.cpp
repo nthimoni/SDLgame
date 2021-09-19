@@ -49,6 +49,7 @@ void RenderWindow::PrintPlayer()
 void RenderWindow::MovePlayer(unsigned int step)
 {
 	bool falling = false;
+	int tempRestant = player.isJumping(step);
 	if (player.isOnLadder(&layer))
 	{
 		player.stopJump();
@@ -58,7 +59,6 @@ void RenderWindow::MovePlayer(unsigned int step)
 	}
 	else
 	{
-		int tempRestant = player.isJumping(step);
 		if (!tempRestant)
 		{
 			falling = player.fall(&layer);
@@ -81,7 +81,7 @@ void RenderWindow::MovePlayer(unsigned int step)
 		player.move(Vector2(PLAYER_VEL, 0), &layer);
 		player.setDir(RIGHT);
 	}
-	if (keys[KEY::S] && !falling)
+	if (keys[KEY::S] && !falling && !tempRestant)
 		player.move(Vector2(0, PLAYER_VEL), &layer);
 
 	// ANIMATION
