@@ -5,6 +5,7 @@
 #include <fstream>
 
 #include "RenderWindow.hpp"
+#include "Player.hpp"
 #include "constantes.hpp"
 
 int	main(int argc, char *argv[])
@@ -15,26 +16,32 @@ int	main(int argc, char *argv[])
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		std::cout << "SDL_init has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
 	if (!IMG_Init(IMG_INIT_PNG))
-		std::cout << "IMG_init has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
-
+		std::cout << "IMG_init_PNG has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
+	if (!IMG_Init(IMG_INIT_JPG))
+		std::cout << "IMG_init_JPEG has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
 	RenderWindow window(TITLE, WIN_W, WIN_H);
 	window.AddLayer("assets/tileset.png", "assets/map1.txt");
+	window.LoadPlayer("assets/mainsheet.png");
+	window.LoadBackground("assets/BG1.jpg");
+	
+	unsigned int previous = 0;
+	unsigned int current = SDL_GetTicks();
+	unsigned int step = 0;
 
-	bool isRunning = true;
-	SDL_Event event;
-
-	while (isRunning)
+	while (window.Event())
 	{
-		while (SDL_PollEvent(&event))
-		{
-			if (event.type == SDL_QUIT)
-				isRunning = 0;
-		}
+		current = SDL_GetTicks();
+		step = current - previous;
+		previous = current;
+		std::cout << step << std::endl;
 		window.Clear();
+		window.PrintBackground();
 		window.PrintMap();
+		window.PrintPlayer();
+		window.MovePlayer(step);
 		window.Render();
 	}
-	window.cleanUp();
+
 	SDL_Quit();
 	return (0);
 }
