@@ -10,7 +10,7 @@
 #include "tools.hpp"
 
 RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h)
-	: window(NULL), renderer(NULL), keys(4, false)
+	: window(NULL), renderer(NULL), background(NULL), keys(4, false)
 {
 	window = SDL_CreateWindow(p_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_w, p_h, SDL_WINDOW_SHOWN);
 	if (!window)
@@ -41,9 +41,21 @@ void RenderWindow::LoadPlayer(const char *sprite)
 	player.setCollision();
 }
 
+void RenderWindow::LoadBurgers(const char *texture, const char *tab)
+{
+	burgers.LoadRenderer(renderer);
+	burgers.LoadTab(tab);
+	burgers.LoadTexture(texture);
+}
+
 void RenderWindow::PrintPlayer()
 {
 	player.display(&camera);
+}
+
+void RenderWindow::PrintBurgers()
+{
+	burgers.Display(&camera);
 }
 
 void RenderWindow::MovePlayer(unsigned int step)
@@ -116,6 +128,18 @@ void RenderWindow::setCameraX(int x)
 void RenderWindow::setCameraY(int y)
 {
 	camera.y = y;
+}
+
+void RenderWindow::PickBurgers()
+{
+	Vector2 playerPos = player.getPos();
+	int minX = playerPos.x / BURGER_W;
+	int maxX = (playerPos.x + PLAYER_W) / BURGER_W;
+	int minY = playerPos.y / BURGER_H;
+	int maxY = (playerPos.y + PLAYER_H) / BURGER_H;
+	for (int i = minX; i <= maxX; i++)
+		for (int u = minY; u <= maxY; u++)
+			burgers.pickUp(i, u);
 }
 
 void RenderWindow::LoadBackground(const char *bgtext)

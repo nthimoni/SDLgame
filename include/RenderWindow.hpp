@@ -8,6 +8,7 @@
 
 #include "TileMap.hpp"
 #include "Player.hpp"
+#include "PickMap.hpp"
 
 namespace KEY
 {
@@ -36,7 +37,10 @@ class RenderWindow
 		void setCamera(Vector2 *pos);
 		void setCameraX(int x);
 		void setCameraY(int y);
+		void PickBurgers();
 		void LoadBackground(const char *bgtext);
+		void LoadBurgers(const char *texture, const char *tab);
+		void PrintBurgers();
 		void PrintBackground();
 		~RenderWindow();
 	private:
@@ -45,6 +49,7 @@ class RenderWindow
 		SDL_Renderer *renderer;
 		SDL_Texture *background;
 		std::vector<TileMap> layer;
+		PickMap burgers;
 		Player player;
 		std::vector<bool> keys;
 	private:

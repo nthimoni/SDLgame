@@ -19,11 +19,12 @@ int	main(int argc, char *argv[])
 		std::cout << "IMG_init_PNG has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
 	if (!IMG_Init(IMG_INIT_JPG))
 		std::cout << "IMG_init_JPEG has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
+
 	RenderWindow window(TITLE, WIN_W, WIN_H);
 	window.AddLayer("assets/tileset.png", "assets/map1.txt");
 	window.LoadPlayer("assets/mainsheet.png");
-	window.LoadBackground("assets/BG1.jpg");
-	
+	window.LoadBackground("assets/BG1.jpg");	
+	window.LoadBurgers("assets/burger.png", "assets/BurgerTab.txt");
 	unsigned int previous = 0;
 	unsigned int current = SDL_GetTicks();
 	unsigned int step = 0;
@@ -37,8 +38,10 @@ int	main(int argc, char *argv[])
 		window.Clear();
 		window.PrintBackground();
 		window.PrintMap();
-		window.PrintPlayer();
+		window.PrintBurgers();
 		window.MovePlayer(step);
+		window.PickBurgers();
+		window.PrintPlayer();
 		window.Render();
 	}
 

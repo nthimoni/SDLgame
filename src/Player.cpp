@@ -54,7 +54,6 @@ bool Player::isOnLadder(std::vector<TileMap> *layer)
 	int MaxX = (position.x + PLAYER_W) / TILE_W;
 	int MaxY = (position.y + PLAYER_H) / TILE_W;
 
-
 	for (int i = MinX; i <= MaxX; i++)
 		for (int u = MinY; u <= MaxY; u++)
 		{

@@ -24,4 +24,8 @@ typedef short int tile_id;
 # define SPRITE_NEUTRE 7
 # define STEP_ANIM 100
 
+// Info burger (pickable)
+# define BURGER_W 32
+# define BURGER_H 32
+
 #endif
