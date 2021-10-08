@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include <vector>
 
@@ -37,11 +38,14 @@ class RenderWindow
 		void setCamera(Vector2 *pos);
 		void setCameraX(int x);
 		void setCameraY(int y);
-		void PickBurgers();
+		void PickBurgers(int *compt_rebours);
 		void LoadBackground(const char *bgtext);
 		void LoadBurgers(const char *texture, const char *tab);
 		void PrintBurgers();
 		void PrintBackground();
+		void PrintTimer(int time);
+		void LoadFont(const char *font_path, int size);
+		void LoadBurgerSound(const char *sound_path);
 		~RenderWindow();
 	private:
 		SDL_Rect camera;
@@ -52,6 +56,7 @@ class RenderWindow
 		PickMap burgers;
 		Player player;
 		std::vector<bool> keys;
+		TTF_Font *font;
 	private:
 		bool KeyDown(SDL_Event *event);
 		bool KeyUp(SDL_Event *event);

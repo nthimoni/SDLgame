@@ -1,8 +1,10 @@
 #include <SDL2/SDL.h> 
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include <iostream>
 #include <vector>
+#include <string>
 
 #include "RenderWindow.hpp"
 #include "TileMap.hpp"
@@ -10,7 +12,7 @@
 #include "tools.hpp"
 
 RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h)
-	: window(NULL), renderer(NULL), background(NULL), keys(4, false)
+	: window(NULL), renderer(NULL), background(NULL), keys(4, false), font(NULL)
 {
 	window = SDL_CreateWindow(p_title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, p_w, p_h, SDL_WINDOW_SHOWN);
 	if (!window)
@@ -130,7 +132,7 @@ void RenderWindow::setCameraY(int y)
 	camera.y = y;
 }
 
-void RenderWindow::PickBurgers()
+void RenderWindow::PickBurgers(int *compt_rebours)
 {
 	Vector2 playerPos = player.getPos();
 	int minX = playerPos.x / BURGER_W;
@@ -139,7 +141,8 @@ void RenderWindow::PickBurgers()
 	int maxY = (playerPos.y + PLAYER_H) / BURGER_H;
 	for (int i = minX; i <= maxX; i++)
 		for (int u = minY; u <= maxY; u++)
-			burgers.pickUp(i, u);
+			if (burgers.pickUp(i, u))
+				*compt_rebours -= BURGER_TIME;
 }
 
 void RenderWindow::LoadBackground(const char *bgtext)
@@ -156,8 +159,34 @@ void RenderWindow::PrintBackground()
 	SDL_RenderCopy(this->renderer, this->background, NULL, NULL);
 }
 
+void RenderWindow::LoadFont(const char *font_path, int size)
+{
+	if (this->font != nullptr)
+		TTF_CloseFont(this->font);
+	this->font = TTF_OpenFont(font_path, size);
+}
+
+void RenderWindow::LoadBurgerSound(const char *sound_path)
+{
+	burgers.LoadBurgerSound(sound_path);
+}
+
+void RenderWindow::PrintTimer(int time)
+{
+	SDL_Color Black{255, 255, 255, 255};
+	SDL_Surface *surface = TTF_RenderText_Blended(this->font, std::to_string(mili_to_sec(time)).c_str(), Black);
+	SDL_Texture *text = SDL_CreateTextureFromSurface(this->renderer, surface);
+	SDL_Rect dst;
+	dst.x = 25;
+	dst.y = 25;
+	dst.w = surface->w;
+	dst.h = surface->h;
+	SDL_RenderCopy(this->renderer, text, NULL, &dst);
+}
+
 RenderWindow::~RenderWindow()
 {
+	TTF_CloseFont(this->font);
 	SDL_DestroyRenderer(this->renderer);
 	SDL_DestroyWindow(this->window);
 	SDL_DestroyTexture(this->background);

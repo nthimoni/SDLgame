@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
 
 #include <iostream>
 #include <vector>
@@ -12,7 +13,7 @@
 #include "tools.hpp"
 #include "constantes.hpp"
 
-PickMap::PickMap() : tab(), renderer(NULL), texture(NULL)
+PickMap::PickMap() : tab(), renderer(NULL), texture(NULL), music(NULL)
 {
 }
 
@@ -48,7 +49,7 @@ void PickMap::ParseLine(std::string line)
 		if (a != 0)
 			tab[tab.size() - 1].emplace_back(new Pickable(&obj));
 		else 
-			tab[tab.size() - 1].push_back(NULL);
+			tab[tab.size() - 1].emplace_back(nullptr);
 	}
 }
 
@@ -93,7 +94,15 @@ bool PickMap::pickUp(int x, int y)
 		return false;
 	delete tab[y][x];
 	tab[y][x] = NULL;
+	Mix_PlayMusic(music, 1);
 	return true;
+}
+
+void PickMap::LoadBurgerSound(const char *sound_path)
+{
+	if (music != nullptr)
+		Mix_FreeMusic(music);
+	music = Mix_LoadMUS(sound_path);
 }
 
 PickMap::~PickMap()

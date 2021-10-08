@@ -28,4 +28,8 @@ typedef short int tile_id;
 # define BURGER_W 32
 # define BURGER_H 32
 
+// INFO TEMPS
+# define MAX_LVL_TIME 120000
+# define BURGER_TIME 10000
+
 #endif
