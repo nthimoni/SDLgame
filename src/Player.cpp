@@ -14,7 +14,7 @@
 
 Player::Player() 
 	: sprite(NULL), renderer(NULL), dir(UP), animState(0),
-   	dur(MAX_TILE, false), ladder(MAX_TILE, false), jumpTime(-1)
+   	dur(MAX_TILE, false), ladder(MAX_TILE, false), jumpTime(-1), score(0)
 {
 	position.x = 0;
 	position.y = 0;
@@ -327,4 +327,15 @@ void Player::display(SDL_Rect *camera)
 void Player::stopJump()
 {
 	this->jumpTime = -1;
+}
+
+int Player::addScore(int val)
+{
+	this->score += val;
+	return (this->score);
+}
+
+int Player::getScore()
+{
+	return (this->score);
 }

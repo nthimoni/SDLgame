@@ -44,6 +44,7 @@ class RenderWindow
 		void PrintBurgers();
 		void PrintBackground();
 		void PrintTimer(int time);
+		void PrintScore();
 		void LoadFont(const char *font_path, int size);
 		void LoadBurgerSound(const char *sound_path);
 		~RenderWindow();

@@ -142,7 +142,10 @@ void RenderWindow::PickBurgers(int *compt_rebours)
 	for (int i = minX; i <= maxX; i++)
 		for (int u = minY; u <= maxY; u++)
 			if (burgers.pickUp(i, u))
+			{
 				*compt_rebours -= BURGER_TIME;
+				player.addScore(SCORE_BURGER);
+			}
 }
 
 void RenderWindow::LoadBackground(const char *bgtext)
@@ -173,15 +176,36 @@ void RenderWindow::LoadBurgerSound(const char *sound_path)
 
 void RenderWindow::PrintTimer(int time)
 {
-	SDL_Color Black{255, 255, 255, 255};
-	SDL_Surface *surface = TTF_RenderText_Blended(this->font, std::to_string(mili_to_sec(time)).c_str(), Black);
+	SDL_Color Black{0, 0, 0, 255};
+	std::string temp = "TIME : ";
+	temp += std::to_string(mili_to_sec(time));
+	SDL_Surface *surface = TTF_RenderText_Blended(this->font, temp.c_str(), Black);
 	SDL_Texture *text = SDL_CreateTextureFromSurface(this->renderer, surface);
 	SDL_Rect dst;
-	dst.x = 25;
-	dst.y = 25;
+	dst.x = TIMER_X_POS;
+	dst.y = TIMER_Y_POS;
 	dst.w = surface->w;
 	dst.h = surface->h;
 	SDL_RenderCopy(this->renderer, text, NULL, &dst);
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(text);
+}
+
+void RenderWindow::PrintScore()
+{
+	SDL_Color Black{0, 0, 0, 255};
+	std::string temp = "SCORE : ";
+	temp +=	std::to_string(player.getScore());
+	SDL_Surface *surface = TTF_RenderText_Blended(this->font, temp.c_str(), Black);
+	SDL_Texture *text = SDL_CreateTextureFromSurface(this->renderer, surface);
+	SDL_Rect dst;
+	dst.x = SCORE_X_POS;
+	dst.y = SCORE_Y_POS;
+	dst.w = surface->w;
+	dst.h = surface->h;
+	SDL_RenderCopy(this->renderer, text, NULL, &dst);
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(text);
 }
 
 RenderWindow::~RenderWindow()

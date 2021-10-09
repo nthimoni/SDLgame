@@ -34,6 +34,8 @@ class Player
 		void stopJump();
 		bool isOnLadder(std::vector<TileMap> *layer);
 		bool fall(std::vector<TileMap> *layer);
+		int addScore(int val);
+		int getScore();
 	private:
 		SDL_Rect position;
 		SDL_Texture *sprite;
@@ -44,6 +46,7 @@ class Player
 		std::vector<bool> dur;
 		std::vector<bool> ladder;
 		int jumpTime;
+		int score;
 };
 
 #endif

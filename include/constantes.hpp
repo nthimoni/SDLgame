@@ -32,4 +32,14 @@ typedef short int tile_id;
 # define MAX_LVL_TIME 120000
 # define BURGER_TIME 10000
 
+// INFO SCORE
+# define SCORE_BURGER 1000
+# define SCORE_TIME 10
+
+// INFO AFFICHAGE
+# define SCORE_X_POS 1100
+# define SCORE_Y_POS 10
+# define TIMER_X_POS 10
+# define TIMER_Y_POS 10
+
 #endif

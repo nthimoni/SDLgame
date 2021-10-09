@@ -55,7 +55,10 @@ int	main(int argc, char *argv[])
 		window.MovePlayer(step);
 		window.PickBurgers(&compt_rebours);
 		window.PrintPlayer();
+		if (compt_rebours < 0)
+			compt_rebours = 0;
 		window.PrintTimer(compt_rebours);
+		window.PrintScore();
 		window.Render();
 		fps++;
 		fps_time += step;
