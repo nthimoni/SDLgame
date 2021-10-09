@@ -68,7 +68,8 @@ int	main(int argc, char *argv[])
 			fps = 0;
 			fps_time = 0;
 		}
-
+		if (window.isLevelFinish())
+			break;
 	}
 	TTF_Quit();
 	SDL_Quit();

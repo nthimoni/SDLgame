@@ -208,6 +208,21 @@ void RenderWindow::PrintScore()
 	SDL_DestroyTexture(text);
 }
 
+bool RenderWindow::isLevelFinish()
+{
+	Vector2 position = player.getPos();
+	int xMin = position.x / TILE_W;
+	int xMax = (position.x + PLAYER_W) / TILE_W;
+	int yMin = position.y / TILE_H;
+	int yMax = (position.y + PLAYER_H) / TILE_H;
+	for (int x = xMin; x <= xMax; x++)
+		for (int y = yMin; y <= yMax; y++)
+			for (unsigned int u = 0; u < layer.size(); u++)
+				if (layer[u].Get(x, y) == 8)
+					return true;
+	return false;
+}
+
 RenderWindow::~RenderWindow()
 {
 	TTF_CloseFont(this->font);
