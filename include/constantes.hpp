@@ -37,9 +37,7 @@ typedef short int tile_id;
 # define SCORE_TIME 10
 
 // INFO AFFICHAGE
-# define SCORE_X_POS 1100
-# define SCORE_Y_POS 10
-# define TIMER_X_POS 10
-# define TIMER_Y_POS 10
+# define FONT_PATH "assets/Highman.ttf"
+# define RANGE_FROM_BORDER 10
 
 #endif

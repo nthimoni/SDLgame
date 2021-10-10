@@ -8,7 +8,7 @@ USELIB = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf #-mwin
 SDLINC = SDL2/x86_64-w64-mingw32/include
 SDLLIB = SDL2/x86_64-w64-mingw32/lib
 
-NAME = bin/SDLGAME.exe
+NAME = bin/SDDLGAME.exe
 
 all: ${NAME}
 

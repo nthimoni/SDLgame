@@ -32,7 +32,7 @@ int	main(int argc, char *argv[])
 	window.LoadBackground("assets/BG1.jpg");	
 	window.LoadBurgers("assets/burger.png", "assets/BurgerTab.txt");
 	window.LoadBurgerSound("assets/borgir.wav");
-	window.LoadFont("assets/HighMan.ttf", 40);
+	window.LoadFont(FONT_PATH, 40);
 	unsigned int previous = 0;
 	unsigned int current = SDL_GetTicks();
 	unsigned int step = 0;
@@ -47,7 +47,8 @@ int	main(int argc, char *argv[])
 		previous = current;
 		compt_rebours -= step;
 		if (compt_rebours <= 0)
-			break;
+			if (window.DefeatScreen() == -1)
+				break;
 		window.Clear();
 		window.PrintBackground();
 		window.PrintMap();
@@ -69,7 +70,8 @@ int	main(int argc, char *argv[])
 			fps_time = 0;
 		}
 		if (window.isLevelFinish())
-			break;
+			if (window.WinScreen() == -1)
+				break;
 	}
 	TTF_Quit();
 	SDL_Quit();

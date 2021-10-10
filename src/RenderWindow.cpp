@@ -182,8 +182,8 @@ void RenderWindow::PrintTimer(int time)
 	SDL_Surface *surface = TTF_RenderText_Blended(this->font, temp.c_str(), Black);
 	SDL_Texture *text = SDL_CreateTextureFromSurface(this->renderer, surface);
 	SDL_Rect dst;
-	dst.x = TIMER_X_POS;
-	dst.y = TIMER_Y_POS;
+	dst.x = RANGE_FROM_BORDER;
+	dst.y = RANGE_FROM_BORDER;
 	dst.w = surface->w;
 	dst.h = surface->h;
 	SDL_RenderCopy(this->renderer, text, NULL, &dst);
@@ -199,8 +199,8 @@ void RenderWindow::PrintScore()
 	SDL_Surface *surface = TTF_RenderText_Blended(this->font, temp.c_str(), Black);
 	SDL_Texture *text = SDL_CreateTextureFromSurface(this->renderer, surface);
 	SDL_Rect dst;
-	dst.x = SCORE_X_POS;
-	dst.y = SCORE_Y_POS;
+	dst.x = WIN_W - (surface->w + RANGE_FROM_BORDER);
+	dst.y = RANGE_FROM_BORDER;
 	dst.w = surface->w;
 	dst.h = surface->h;
 	SDL_RenderCopy(this->renderer, text, NULL, &dst);

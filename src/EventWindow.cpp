@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include <iostream>
 
@@ -74,4 +75,100 @@ bool RenderWindow::KeyUp(SDL_Event *event)
 bool RenderWindow::isPressed(int indice)
 {
 	return keys[indice];
+}
+
+int RenderWindow::DefeatScreen()
+{
+	SDL_Event event;
+	bool clicked = false;
+	TTF_Font *fontwin = TTF_OpenFont(FONT_PATH, 70);
+	SDL_Color Black{0, 0, 0, 255};
+	SDL_Rect dst;
+
+	SDL_SetRenderDrawColor(renderer, 150, 0, 0, 255);
+	SDL_RenderClear(this->renderer);
+
+	SDL_Surface *surface = TTF_RenderText_Blended(fontwin, "GAME OVER !", Black);
+	SDL_Texture *text = SDL_CreateTextureFromSurface(this->renderer, surface);
+
+	dst.x = (WIN_W - surface->w) / 2;
+	dst.y = 200;
+	dst.w = surface->w;
+	dst.h = surface->h;
+
+	SDL_RenderCopy(this->renderer, text, NULL, &dst);
+
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(text);
+	TTF_CloseFont(fontwin);
+	SDL_RenderPresent(this->renderer);
+	while (!clicked)
+	{
+		while (SDL_PollEvent(&event))
+			switch (event.type)
+			{
+				case SDL_KEYDOWN:
+					if (event.key.keysym.sym == SDLK_RETURN)
+						return -1;;
+					break;
+				case SDL_QUIT:
+					return -1;
+					break;
+			}
+	}
+	return -1;
+}
+
+int RenderWindow::WinScreen()
+{
+	SDL_Event event;
+	bool clicked = false;
+	TTF_Font *fontwin = TTF_OpenFont(FONT_PATH, 70);
+	SDL_Color Black{0, 0, 0, 255};
+	SDL_Rect dst;
+
+	SDL_SetRenderDrawColor(renderer, 0, 150, 0, 255);
+	SDL_RenderClear(this->renderer);
+
+	SDL_Surface *surface = TTF_RenderText_Blended(fontwin, "VICTORY !", Black);
+	SDL_Texture *text = SDL_CreateTextureFromSurface(this->renderer, surface);
+
+	dst.x = (WIN_W - surface->w) / 2;
+	dst.y = 200;
+	dst.w = surface->w;
+	dst.h = surface->h;
+
+	SDL_RenderCopy(this->renderer, text, NULL, &dst);
+	
+	std::string temp = "SCORE : ";
+	temp += std::to_string(player.getScore());
+	surface = TTF_RenderText_Blended(fontwin, temp.c_str(), Black);
+	text = SDL_CreateTextureFromSurface(this->renderer, surface);
+
+	dst.x = (WIN_W - surface->w) / 2;
+	dst.y = 350;
+	dst.w = surface->w;
+	dst.h = surface->h;
+
+	SDL_RenderCopy(this->renderer, text, NULL, &dst);
+
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(text);
+	TTF_CloseFont(fontwin);
+	SDL_RenderPresent(this->renderer);
+	while (!clicked)
+	{
+		while (SDL_PollEvent(&event))
+			switch (event.type)
+			{
+				case SDL_KEYDOWN:
+					if (event.key.keysym.sym == SDLK_RETURN)
+						return -1;;
+					break;
+				case SDL_QUIT:
+					return -1;
+					break;
+			}
+	}
+	return -1;
 }

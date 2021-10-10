@@ -48,6 +48,8 @@ class RenderWindow
 		void LoadFont(const char *font_path, int size);
 		void LoadBurgerSound(const char *sound_path);
 		bool isLevelFinish();
+		int WinScreen();
+		int DefeatScreen();
 		~RenderWindow();
 	private:
 		SDL_Rect camera;
