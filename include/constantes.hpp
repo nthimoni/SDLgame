@@ -35,6 +35,7 @@ typedef short int tile_id;
 // INFO SCORE
 # define SCORE_BURGER 1000
 # define SCORE_TIME 10
+# define MILI_PER_POINT 20 // nombre de milisecondes pour obtenir un poit bonus en fin de partie
 
 // INFO AFFICHAGE
 # define FONT_PATH "assets/Highman.ttf"

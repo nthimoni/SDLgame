@@ -50,6 +50,7 @@ class RenderWindow
 		bool isLevelFinish();
 		int WinScreen();
 		int DefeatScreen();
+		void CompleteScore(int time);
 		~RenderWindow();
 	private:
 		SDL_Rect camera;

@@ -70,8 +70,11 @@ int	main(int argc, char *argv[])
 			fps_time = 0;
 		}
 		if (window.isLevelFinish())
+		{
+			window.CompleteScore(compt_rebours);
 			if (window.WinScreen() == -1)
 				break;
+		}
 	}
 	TTF_Quit();
 	SDL_Quit();

@@ -172,3 +172,8 @@ int RenderWindow::WinScreen()
 	}
 	return -1;
 }
+
+void RenderWindow::CompleteScore(int time)
+{
+	this->player.addScore(time / MILI_PER_POINT);
+}
