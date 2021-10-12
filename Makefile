@@ -1,4 +1,4 @@
-SRC = src/main.cpp src/RenderWindow.cpp src/TileMap.cpp src/Player.cpp src/EventWindow.cpp src/tools.cpp src/PickMap.cpp src/Pickable.cpp
+SRC = src/main.cpp src/RenderWindow.cpp src/TileMap.cpp src/Player.cpp src/EventWindow.cpp src/tools.cpp src/PickMap.cpp src/Pickable.cpp src/init.cpp
 OBJ = ${SRC:.cpp=.o}
 INC = include/
 
@@ -8,7 +8,7 @@ USELIB = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf #-mwin
 SDLINC = SDL2/x86_64-w64-mingw32/include
 SDLLIB = SDL2/x86_64-w64-mingw32/lib
 
-NAME = bin/SDDLGAME.exe
+NAME = bin/SteakOvergame.exe
 
 all: ${NAME}
 

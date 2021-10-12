@@ -9,22 +9,15 @@
 #include "RenderWindow.hpp"
 #include "Player.hpp"
 #include "constantes.hpp"
+#include "init.hpp"
 
 int	main(int argc, char *argv[])
 {
 	(void)argc;
 	(void)argv;
 
-	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
-		std::cout << "SDL_init has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
-	if (!IMG_Init(IMG_INIT_PNG))
-		std::cout << "IMG_init_PNG has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
-	if (!IMG_Init(IMG_INIT_JPG))
-		std::cout << "IMG_init_JPEG has failed. SDL_ERROR : " << SDL_GetError() << std::endl;
-	if (TTF_Init() == -1)
-		std::cout << "Erreur lors de TTF_INIT() " << TTF_GetError() << std::endl;
-	if (Mix_OpenAudio(96000, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024) < 0)
-		std::cout << "Erreur initialisation SDL_mixer : " <<  Mix_GetError() << std::endl;
+	if (!Init())
+		return (0);
 
 	RenderWindow window(TITLE, WIN_W, WIN_H);
 	window.AddLayer("assets/tileset.png", "assets/map1.txt");
@@ -76,7 +69,6 @@ int	main(int argc, char *argv[])
 				break;
 		}
 	}
-	TTF_Quit();
-	SDL_Quit();
+	Quit();
 	return (0);
 }
