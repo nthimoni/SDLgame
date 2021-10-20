@@ -5,8 +5,8 @@ INC = include/
 CXX = g++
 CFLAGS = -Wall -Werror -Wextra -O3
 USELIB = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf #-mwindows
-SDLINC = SDL2/x86_64-w64-mingw32/include
-SDLLIB = SDL2/x86_64-w64-mingw32/lib
+SDLINC = ../SDL2/x86_64-w64-mingw32/include
+SDLLIB = ../SDL2/x86_64-w64-mingw32/lib
 
 NAME = bin/SteakOvergame.exe
 

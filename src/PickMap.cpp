@@ -71,7 +71,7 @@ void PickMap::Display(SDL_Rect *camera)
 {
 	for (unsigned int i = 0; i < tab.size(); i++)
 		for (unsigned int u = 0; u < tab[i].size(); u++)
-			if (tab[i][u] != NULL)
+			if (tab[i][u] != nullptr)
 				tab[i][u]->display(this->renderer, this->texture, camera);
 }
 
@@ -79,7 +79,7 @@ void PickMap::FreeTab()
 {
 	for (unsigned int i = 0; i < tab.size(); i++)
 		for (unsigned int u = 0; u < tab[i].size(); u++)
-			if (tab[i][u] != NULL)
+			if (tab[i][u] != nullptr)
 				delete tab[i][u];
 	tab.clear();
 }
@@ -90,10 +90,10 @@ bool PickMap::pickUp(int x, int y)
 		return false;
 	if (x < 0 || x > (int)tab[y].size() - 1)
 		return false;
-	if (tab[y][x] == NULL)
+	if (tab[y][x] == nullptr)
 		return false;
 	delete tab[y][x];
-	tab[y][x] = NULL;
+	tab[y][x] = nullptr;
 	Mix_PlayMusic(music, 1);
 	return true;
 }
@@ -107,6 +107,7 @@ void PickMap::LoadBurgerSound(const char *sound_path)
 
 PickMap::~PickMap()
 {
+	Mix_FreeMusic(music);
 	SDL_DestroyTexture(texture);
 	this->FreeTab();
 }

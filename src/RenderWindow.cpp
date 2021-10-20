@@ -106,6 +106,7 @@ void RenderWindow::MovePlayer(unsigned int step)
 
 	// CAMERA
 	this->setCameraX(player.getPos().x + PLAYER_W / 2 - WIN_W / 2);
+	this->setCameraY(player.getPos().y + PLAYER_H / 2 - WIN_H / 2);
 }
 
 void RenderWindow::Clear()
