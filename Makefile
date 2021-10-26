@@ -1,4 +1,12 @@
-SRC = src/main.cpp src/RenderWindow.cpp src/TileMap.cpp src/Player.cpp src/EventWindow.cpp src/tools.cpp src/PickMap.cpp src/Pickable.cpp src/init.cpp
+SRC = src/main.cpp\
+src/RenderWindow.cpp\
+src/TileMap.cpp\
+src/Player.cpp\
+src/EventWindow.cpp\
+src/tools.cpp\
+src/PickMap.cpp\
+src/Pickable.cpp\
+src/init.cpp
 OBJ = ${SRC:.cpp=.o}
 INC = include/
 
@@ -18,6 +26,9 @@ ${NAME}: ${OBJ}
 %.o: %.cpp
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
+run: all
+	cd bin ; ./SteakOvergame.exe ; cd ..
+
 clean:
 	rm -f ${OBJ}
 
@@ -26,4 +37,4 @@ fclean: clean
 
 re: clean fclean ${NAME}
 
-.PHONY: clean fclean re
+.PHONY: clean fclean re all run
