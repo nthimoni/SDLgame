@@ -17,3 +17,7 @@ int mili_to_sec(int time)
 {
 	return (time / 1000);
 }
+float mili_to_sec_float(int time)
+{
+	return (time / 1000.0f);
+}

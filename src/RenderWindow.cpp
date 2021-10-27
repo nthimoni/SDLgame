@@ -5,6 +5,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <cmath>
 
 #include "RenderWindow.hpp"
 #include "TileMap.hpp"
@@ -64,6 +65,8 @@ void RenderWindow::MovePlayer(unsigned int step)
 {
 	bool falling = false;
 	int tempRestant = player.isJumping(step);
+	float stepSec = 
+
 	if (player.isOnLadder(&layer))
 	{
 		player.stopJump();

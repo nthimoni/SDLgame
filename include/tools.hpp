@@ -12,5 +12,6 @@ class Vector2
 
 bool XOR(bool a, bool b);
 int mili_to_sec(int time);
+float mili_to_sec_float(int time);
 
 #endif
