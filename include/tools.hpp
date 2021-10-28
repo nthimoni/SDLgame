@@ -10,6 +10,12 @@ class Vector2
 		int y;
 };
 
+struct Vec2f
+{
+	float x;
+	float y;
+};
+
 bool XOR(bool a, bool b);
 int mili_to_sec(int time);
 float mili_to_sec_float(int time);

@@ -10,6 +10,7 @@
 #include "TileMap.hpp"
 #include "Player.hpp"
 #include "PickMap.hpp"
+#include "tools.hpp"
 
 namespace KEY
 {
@@ -62,9 +63,11 @@ class RenderWindow
 		Player player;
 		std::vector<bool> keys;
 		TTF_Font *font;
+		Vec2f deltaMove;
 	private:
 		bool KeyDown(SDL_Event *event);
 		bool KeyUp(SDL_Event *event);
+		Vector2 add_delta(float x, float y);
 };
 
 #endif

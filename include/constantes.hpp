@@ -16,9 +16,9 @@ typedef short int tile_id;
 // Info Player
 # define PLAYER_W 37
 # define PLAYER_H 62
-# define PLAYER_VEL 5
-# define JUMP_TIME_MAX 350
-# define JUMP_VEL 2
+# define PLAYER_VEL 700
+# define JUMP_TIME_MAX 350 
+# define JUMP_VEL 280
 # define GRAVITY_VEL 5
 # define NB_SPRITE_LINE 8
 # define SPRITE_NEUTRE 7

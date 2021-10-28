@@ -25,6 +25,8 @@ RenderWindow::RenderWindow(const char *p_title, int p_w, int p_h)
 	camera.y = 0;
 	camera.w = WIN_W;
 	camera.h = WIN_H;
+	deltaMove.x = 0;
+	deltaMove.y = 0;
 }
 
 void RenderWindow::AddLayer(const char *p_text, const char *p_tab)
@@ -65,14 +67,17 @@ void RenderWindow::MovePlayer(unsigned int step)
 {
 	bool falling = false;
 	int tempRestant = player.isJumping(step);
-	float stepSec = 
+	float actual_vel = PLAYER_VEL * mili_to_sec_float(step);
+	float actual_jump_vel = JUMP_VEL * mili_to_sec_float(step);
+
 
 	if (player.isOnLadder(&layer))
 	{
 		player.stopJump();
 
 		if (keys[KEY::Z])
-			player.move(Vector2(0, -PLAYER_VEL), &layer);
+			player.move(add_delta(0, -actual_vel), &layer);
+
 	}
 	else
 	{
@@ -84,22 +89,22 @@ void RenderWindow::MovePlayer(unsigned int step)
 					player.jump();
 		}
 		else
-			if (!player.move(Vector2(0, -JUMP_VEL * tempRestant / 100), &layer))
+			if (!player.move(add_delta(0, -actual_jump_vel * tempRestant / 100), &layer))
 				player.stopJump();
 	}
 
 	if (keys[KEY::Q])
 	{
-		player.move(Vector2(-PLAYER_VEL, 0), &layer);
+		player.move(add_delta(-actual_vel, 0), &layer);
 		player.setDir(LEFT);
 	}
 	if (keys[KEY::D])
 	{
-		player.move(Vector2(PLAYER_VEL, 0), &layer);
+		player.move(add_delta(actual_vel, 0), &layer);
 		player.setDir(RIGHT);
 	}
 	if (keys[KEY::S] && !falling && !tempRestant)
-		player.move(Vector2(0, PLAYER_VEL), &layer);
+		player.move(add_delta(0, actual_vel), &layer);
 
 	// ANIMATION
 	if (XOR(keys[KEY::D], keys[KEY::Q]))
@@ -226,6 +231,17 @@ bool RenderWindow::isLevelFinish()
 					return true;
 	return false;
 }
+
+Vector2 RenderWindow::add_delta(float x, float y)
+{
+	Vector2 ret;
+	ret.x = (int)(x + deltaMove.x);
+	deltaMove.x = (x + deltaMove.x) - (int)(x + deltaMove.x);
+	ret.y = (int)(y + deltaMove.y);
+	deltaMove.y = (y + deltaMove.y) - (int)(y + deltaMove.y);
+	return ret;
+}
+
 
 RenderWindow::~RenderWindow()
 {
