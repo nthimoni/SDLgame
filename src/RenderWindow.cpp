@@ -83,7 +83,7 @@ void RenderWindow::MovePlayer(unsigned int step)
 	{
 		if (!tempRestant)
 		{
-			falling = player.fall(&layer);
+			falling = player.fall(&layer, step, &deltaMove);
 			if (!falling)
 				if (keys[KEY::Z])
 					player.jump();

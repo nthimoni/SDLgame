@@ -223,13 +223,16 @@ bool Player::moveY(int y, std::vector<TileMap> *layer)
 	return (true);
 }
 
-bool Player::fall(std::vector<TileMap> *layer)
+bool Player::fall(std::vector<TileMap> *layer, int step, Vec2f *delta)
 {
 	int MinX = 0;
 	int MinY = 0;
 	int MaxX = 0;
 	int MaxY = 0;
-	int range = GRAVITY_VEL;
+	int range = (int)(GRAVITY_VEL * mili_to_sec_float(step) + delta->y);
+	delta->y = (GRAVITY_VEL * mili_to_sec_float(step) + delta->y) - range;
+
+
 	for (int t = 0; t < range;  t++)
 	{
 		position.y += 1;

@@ -33,7 +33,7 @@ class Player
 		void jump();
 		void stopJump();
 		bool isOnLadder(std::vector<TileMap> *layer);
-		bool fall(std::vector<TileMap> *layer);
+		bool fall(std::vector<TileMap> *layer, int step, Vec2f *delta);
 		int addScore(int val);
 		int getScore();
 	private:
