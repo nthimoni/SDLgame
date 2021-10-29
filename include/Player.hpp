@@ -33,9 +33,10 @@ class Player
 		void jump();
 		void stopJump();
 		bool isOnLadder(std::vector<TileMap> *layer);
-		bool fall(std::vector<TileMap> *layer, int step, Vec2f *delta);
+		bool fall(std::vector<TileMap> *layer, int step);
 		int addScore(int val);
 		int getScore();
+		Vector2 add_delta(float x, float y);
 	private:
 		SDL_Rect position;
 		SDL_Texture *sprite;
@@ -47,6 +48,7 @@ class Player
 		std::vector<bool> ladder;
 		int jumpTime;
 		int score;
+		Vec2f deltaMove;
 };
 
 #endif

@@ -20,6 +20,8 @@ Player::Player()
 	position.y = 0;
 	position.w = PLAYER_W;
 	position.h = PLAYER_H;
+	deltaMove.x = 0;
+	deltaMove.y = 0;
 }
 
 Player::Player(const char *path_sprite, SDL_Renderer *p_renderer) 
@@ -32,6 +34,8 @@ Player::Player(const char *path_sprite, SDL_Renderer *p_renderer)
 	position.h = PLAYER_H;
 	this->renderer = p_renderer;
 	this->LoadSprite(path_sprite);
+	deltaMove.x = 0;
+	deltaMove.y = 0;
 }
 
 void Player::setCollision()
@@ -223,14 +227,14 @@ bool Player::moveY(int y, std::vector<TileMap> *layer)
 	return (true);
 }
 
-bool Player::fall(std::vector<TileMap> *layer, int step, Vec2f *delta)
+bool Player::fall(std::vector<TileMap> *layer, int step)
 {
 	int MinX = 0;
 	int MinY = 0;
 	int MaxX = 0;
 	int MaxY = 0;
-	int range = (int)(GRAVITY_VEL * mili_to_sec_float(step) + delta->y);
-	delta->y = (GRAVITY_VEL * mili_to_sec_float(step) + delta->y) - range;
+	int range = (int)(GRAVITY_VEL * mili_to_sec_float(step) + deltaMove.y);
+	deltaMove.y = (GRAVITY_VEL * mili_to_sec_float(step) + deltaMove.y) - range;
 
 
 	for (int t = 0; t < range;  t++)
@@ -341,4 +345,13 @@ int Player::addScore(int val)
 int Player::getScore()
 {
 	return (this->score);
+}
+Vector2 Player::add_delta(float x, float y)
+{
+	Vector2 ret;
+	ret.x = (int)(x + deltaMove.x);
+	deltaMove.x = (x + deltaMove.x) - (int)(x + deltaMove.x);
+	ret.y = (int)(y + deltaMove.y);
+	deltaMove.y = (y + deltaMove.y) - (int)(y + deltaMove.y);
+	return ret;
 }
