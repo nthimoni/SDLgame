@@ -15,14 +15,17 @@ typedef short int tile_id;
 
 // Info Player
 # define PLAYER_W 37
-# define PLAYER_H 62
+# define PLAYER_H 60
 # define PLAYER_VEL 700
 # define JUMP_TIME_MAX 350
 # define JUMP_VEL 260
 # define GRAVITY_VEL 490
 # define NB_SPRITE_LINE 8
 # define SPRITE_NEUTRE 7
-# define STEP_ANIM 100
+# define STEP_ANIM 80
+
+// INFO ENNEMY
+# define ENNEMY_VEL 200
 
 // Info burger (pickable)
 # define BURGER_W 32

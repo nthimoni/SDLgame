@@ -6,7 +6,8 @@ src/EventWindow.cpp\
 src/tools.cpp\
 src/PickMap.cpp\
 src/Pickable.cpp\
-src/init.cpp
+src/init.cpp\
+src/EntityManager.cpp
 OBJ = ${SRC:.cpp=.o}
 INC = include/
 

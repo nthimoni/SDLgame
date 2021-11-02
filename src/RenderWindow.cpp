@@ -230,8 +230,25 @@ bool RenderWindow::isLevelFinish()
 	return false;
 }
 
+void RenderWindow::PrintEnnemy(EntityManager *manager)
+{
+	manager->display(&camera);
+}
 
+void RenderWindow::PatrolEnnemy(EntityManager *manager, int step)
+{
+	manager->patrol(&layer, step);
+}
 
+SDL_Renderer *RenderWindow::getRenderer()
+{
+	return renderer;
+}
+
+bool RenderWindow::hitting(EntityManager *manager)
+{
+	return manager->hitting(player.getRect());
+}
 
 RenderWindow::~RenderWindow()
 {

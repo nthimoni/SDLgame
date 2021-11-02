@@ -14,7 +14,7 @@
 
 Player::Player() 
 	: sprite(NULL), renderer(NULL), dir(UP), animState(0),
-   	dur(MAX_TILE, false), ladder(MAX_TILE, false), jumpTime(-1), score(0)
+	dur(MAX_TILE, false), ladder(MAX_TILE, false), jumpTime(-1), score(0)
 {
 	position.x = 0;
 	position.y = 0;
@@ -26,7 +26,7 @@ Player::Player()
 
 Player::Player(const char *path_sprite, SDL_Renderer *p_renderer) 
 	: sprite(NULL), renderer(NULL), dir(UP), animState(0),
-   	dur(MAX_TILE, false), ladder(MAX_TILE, false), jumpTime(-1)
+	dur(MAX_TILE, false), ladder(MAX_TILE, false), jumpTime(-1)
 {
 	position.x = 0;
 	position.y = 0;
@@ -172,6 +172,8 @@ bool Player::moveX(int x, std::vector<TileMap> *layer)
 	for (int t = 0 ; t < abs(x) ; t++)
 	{
 		position.x += 1 * signX;
+		if (position.x + position.w < 0)
+			continue;
 		MinX = position.x / TILE_W;
 		MinY = position.y / TILE_H;
 		MaxX = (position.x + PLAYER_W) / TILE_W;
@@ -240,6 +242,8 @@ bool Player::fall(std::vector<TileMap> *layer, int step)
 	for (int t = 0; t < range;  t++)
 	{
 		position.y += 1;
+		if (position.x + position.w < 0)
+			continue;
 		MinX = position.x / TILE_W;
 		MinY = position.y / TILE_H;
 		MaxX = (position.x + PLAYER_W) / TILE_W;
@@ -320,7 +324,7 @@ void Player::display(SDL_Rect *camera)
 {
 	SDL_Rect src;
 	src.x = animState * (PLAYER_W + 40) + 20;
-	src.y = dir * (PLAYER_H + 15) + 15;
+	src.y = dir * (PLAYER_H + 17) + 15;
 	src.w = PLAYER_W;
 	src.h = PLAYER_H;
 	SDL_Rect dst;
@@ -346,6 +350,7 @@ int Player::getScore()
 {
 	return (this->score);
 }
+
 Vector2 Player::add_delta(float x, float y)
 {
 	Vector2 ret;
@@ -354,4 +359,56 @@ Vector2 Player::add_delta(float x, float y)
 	ret.y = (int)(y + deltaMove.y);
 	deltaMove.y = (y + deltaMove.y) - (int)(y + deltaMove.y);
 	return ret;
+}
+
+Direction  Player::getDir()
+{
+	return dir;
+}
+
+bool Player::canWalk(std::vector<TileMap> *layer)
+{
+	int x = 0;
+	int y = 0;
+	tile_id tile = 0;
+	for (unsigned int i = 0; i < layer->size(); i++)
+	{
+		if (dir == LEFT)
+		{
+			if (position.x <= 0)
+				return false;
+			x = position.x + 5;
+			y = position.y + position.h + 5;
+			x /= TILE_W;
+			y /= TILE_H;
+			tile = (*layer)[i].Get(x, y);
+			if (dur[tile] || ladder[tile])
+				return true;
+		}
+		else if (dir == RIGHT)
+		{
+			x = position.x + position.w + 5;
+			y = position.y + position.h + 5;
+			x /= TILE_W;
+			y /= TILE_H;
+			tile = (*layer)[i].Get(x, y);
+			if (dur[tile] || ladder[tile])
+				return true;
+
+		}
+	}
+	return false;
+}
+
+void Player::reverseDir()
+{
+	if (dir == RIGHT)
+		dir = LEFT;
+	else
+		dir = RIGHT;
+}
+
+SDL_Rect Player::getRect()
+{
+	return position; 
 }

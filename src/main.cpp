@@ -10,6 +10,7 @@
 #include "Player.hpp"
 #include "constantes.hpp"
 #include "init.hpp"
+#include "EntityManager.hpp"
 
 int	main(int argc, char *argv[])
 {
@@ -24,6 +25,8 @@ int	main(int argc, char *argv[])
 		window.LoadBurgers("assets/burger.png", "assets/BurgerTab.txt");
 		window.LoadBurgerSound("assets/borgir.wav");
 		window.LoadFont(FONT_PATH, 40);
+		EntityManager manager;
+		manager.addEntity("assets/SkeletonSprite.png", window.getRenderer(), Vector2{1000, 0}); 
 		unsigned int previous = 0;
 		unsigned int current = SDL_GetTicks();
 		unsigned int step = 0;
@@ -51,6 +54,11 @@ int	main(int argc, char *argv[])
 				compt_rebours = 0;
 			window.PrintTimer(compt_rebours);
 			window.PrintScore();
+			window.PatrolEnnemy(&manager,step);
+			window.PrintEnnemy(&manager);
+			if (window.hitting(&manager))
+				if (window.DefeatScreen() == -1)
+					break;
 			window.Render();
 			fps++;
 			fps_time += step;

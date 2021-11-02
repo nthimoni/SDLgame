@@ -3,13 +3,15 @@ make: Entering directory '/c/Users/thimo/OneDrive/Desktop/C++DEV/SDLgame'
 g++ -c -Wall -Werror -Wextra -O3 src/main.cpp -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -o src/main.o
 g++ -c -Wall -Werror -Wextra -O3 src/RenderWindow.cpp -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -o src/RenderWindow.o
 g++ -c -Wall -Werror -Wextra -O3 src/TileMap.cpp -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -o src/TileMap.o
+ 
 g++ -c -Wall -Werror -Wextra -O3 src/Player.cpp -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -o src/Player.o
 g++ -c -Wall -Werror -Wextra -O3 src/EventWindow.cpp -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -o src/EventWindow.o
 g++ -c -Wall -Werror -Wextra -O3 src/tools.cpp -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -o src/tools.o
 g++ -c -Wall -Werror -Wextra -O3 src/PickMap.cpp -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -o src/PickMap.o
 g++ -c -Wall -Werror -Wextra -O3 src/Pickable.cpp -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -o src/Pickable.o
 g++ -c -Wall -Werror -Wextra -O3 src/init.cpp -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -o src/init.o
-g++ src/main.o src/RenderWindow.o src/TileMap.o src/Player.o src/EventWindow.o src/tools.o src/PickMap.o src/Pickable.o src/init.o -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -L../SDL2/x86_64-w64-mingw32/lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf  -o bin/SteakOvergame.exe
+g++ -c -Wall -Werror -Wextra -O3 src/EntityManager.cpp -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -o src/EntityManager.o
+g++ src/main.o src/RenderWindow.o src/TileMap.o src/Player.o src/EventWindow.o src/tools.o src/PickMap.o src/Pickable.o src/init.o src/EntityManager.o -I../SDL2/x86_64-w64-mingw32/include -Iinclude/ -L../SDL2/x86_64-w64-mingw32/lib -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf  -o bin/SteakOvergame.exe
 cd bin ; ./SteakOvergame.exe ; cd ..
 make: Leaving directory '/c/Users/thimo/OneDrive/Desktop/C++DEV/SDLgame'
  

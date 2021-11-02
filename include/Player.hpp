@@ -28,6 +28,7 @@ class Player
 		void LoadRenderer(SDL_Renderer *renderer);
 		Vector2 getPos();
 		void setDir(Direction dir);
+		Direction getDir();
 		void setCollision();
 		int isJumping(unsigned int step);
 		void jump();
@@ -37,6 +38,9 @@ class Player
 		int addScore(int val);
 		int getScore();
 		Vector2 add_delta(float x, float y);
+		bool canWalk(std::vector<TileMap> *layer);
+		void reverseDir();
+		SDL_Rect getRect();
 	private:
 		SDL_Rect position;
 		SDL_Texture *sprite;

@@ -11,6 +11,7 @@
 #include "Player.hpp"
 #include "PickMap.hpp"
 #include "tools.hpp"
+#include "EntityManager.hpp"
 
 namespace KEY
 {
@@ -52,6 +53,10 @@ class RenderWindow
 		int WinScreen();
 		int DefeatScreen();
 		void CompleteScore(int time);
+		void PrintEnnemy(EntityManager *entities);
+		void PatrolEnnemy(EntityManager *entities, int step);
+		SDL_Renderer *getRenderer();
+		bool hitting(EntityManager *manager);
 		~RenderWindow();
 	private:
 		SDL_Rect camera;

@@ -7,25 +7,25 @@ make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --quest
 # There is NO WARRANTY, to the extent permitted by law.
  
 
-# Make data base, printed on Mon Oct 25 01:16:41 2021
+# Make data base, printed on Sun Oct 31 18:45:08 2021
 
 # Variables
+ 
 
 # environment
 SYSTEMDRIVE = C:
-# makefile (from 'Makefile', line 10)
+# makefile (from 'Makefile', line 11)
 OBJ = ${SRC:.cpp=.o}
 # environment
 LC_ALL = C
 # makefile (from 'Makefile', line 1)
- 
-SRC = src/main.cpp src/RenderWindow.cpp src/TileMap.cpp src/Player.cpp src/EventWindow.cpp src/tools.cpp src/PickMap.cpp src/Pickable.cpp src/init.cpp
+SRC = src/main.cpp src/RenderWindow.cpp src/TileMap.cpp src/Player.cpp src/EventWindow.cpp src/tools.cpp src/PickMap.cpp src/Pickable.cpp src/init.cpp src/EntityManager.cpp
 # environment
 USERPROFILE = C:\Users\thimo
 # environment
 LOCALAPPDATA = C:\Users\thimo\AppData\Local
 # environment
-VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-0d44fd98-ec83-424e-87f5-8c5b19c10b4e-sock
+VSCODE_IPC_HOOK_EXTHOST = \\.\pipe\vscode-ipc-33997633-e5a2-4670-a949-6946714862fc-sock
 # environment
 VSCODE_CWD = C:\Users\thimo\OneDrive\Desktop\C++DEV\SDLgame
 # environment
@@ -39,7 +39,7 @@ MAKE_COMMAND := make
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # environment
-CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_54948_TMYIQYPLHKNSZJBR
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_91508_OGMKRHRRUKKVUDMM
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
@@ -93,7 +93,7 @@ MAKEFILE_LIST := Makefile
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 54948
+VSCODE_PID = 91508
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
@@ -120,7 +120,7 @@ MAKECMDGOALS := all
 DRIVERDATA = C:\Windows\System32\Drivers\DriverData
 # environment
 COMSPEC = C:\WINDOWS\system32\cmd.exe
-# makefile (from 'Makefile', line 15)
+# makefile (from 'Makefile', line 16)
 USELIB = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_mixer -lSDL2_ttf 
 # environment
 WINDIR = C:\WINDOWS
@@ -130,7 +130,7 @@ MAKELEVEL := 0
 MAKE = $(MAKE_COMMAND)
 # environment
 PATH = /c/Program Files/Common Files/Oracle/Java/javapath:/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/c/windows/system32:/c/windows:/c/windows/System32/Wbem:/c/windows/System32/WindowsPowerShell/v1.0:/c/windows/System32/OpenSSH:/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/c/WINDOWS/system32:/c/WINDOWS:/c/WINDOWS/System32/Wbem:/c/WINDOWS/System32/WindowsPowerShell/v1.0:/c/WINDOWS/System32/OpenSSH:/c/Program Files/Git/cmd:/c/Program Files/Java/jdk-17.0.1/bin:/c/Users/thimo/AppData/Local/Programs/Python/Python39/Scripts:/c/Users/thimo/AppData/Local/Programs/Python/Python39:/c/Users/thimo/AppData/Local/Microsoft/WindowsApps:/c/PyCharm Community Edition 2020.3.3/bin:/c/Users/thimo/AppData/Local/Programs/Microsoft VS Code/bin:/mingw64/bin:/usr/bin:/c/Program Files/Git/bin:/c/Program Files/Java/jdk-17.0.1/bin
-# makefile (from 'Makefile', line 16)
+# makefile (from 'Makefile', line 17)
 SDLINC = ../SDL2/x86_64-w64-mingw32/include
 # environment
 COMPUTERNAME = LAPTOP-6QU1QIM5
@@ -145,16 +145,17 @@ LOGONSERVER = \\LAPTOP-6QU1QIM5
 # environment
 VSCODE_LOG_NATIVE = false
 # environment
+ 
 USERNAME = thimo
 # environment
 COMMONPROGRAMFILES = C:\Program Files\Common Files
 # automatic
 ?F = $(notdir $?)
-# makefile (from 'Makefile', line 11)
+# makefile (from 'Makefile', line 12)
 INC = include/
 # environment
 PROGRAMW6432 = C:\Program Files
-# makefile (from 'Makefile', line 19)
+# makefile (from 'Makefile', line 20)
 NAME = bin/SteakOvergame.exe
 # environment
 PATHEXT = .COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
@@ -184,8 +185,7 @@ NUMBER_OF_PROCESSORS = 16
 PUBLIC = C:\Users\Public
 # environment
 APPDATA = C:\Users\thimo\AppData\Roaming
-# makefile (from 'Makefile', line 14)
- 
+# makefile (from 'Makefile', line 15)
 CFLAGS = -Wall -Werror -Wextra -O3
 # environment
 HOMEDRIVE = C:
@@ -227,13 +227,14 @@ ELECTRON_NO_ATTACH_CONSOLE = 1
 REGIONCODE = EMEA
 # environment
 PROCESSOR_REVISION = a502
-# makefile (from 'Makefile', line 13)
+# makefile (from 'Makefile', line 14)
 CXX = g++
-# makefile (from 'Makefile', line 17)
+# makefile (from 'Makefile', line 18)
 SDLLIB = ../SDL2/x86_64-w64-mingw32/lib
 # environment
 PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
 # variable set hash-table stats:
+ 
 # Load=110/1024=11%, Rehash=0, Collisions=20/142=14%
 
 # Pattern-specific Variable Values
@@ -242,15 +243,15 @@ PROCESSOR_IDENTIFIER = Intel64 Family 6 Model 165 Stepping 2, GenuineIntel
 
 # Directories
 
-# src (device 3400437966, inode 6192449488275316): 20 files, no impossibilities so far.
+# src (device 3400437966, inode 6192449488275316): 23 files, no impossibilities so far.
 # . (device 3400437966, inode 26740122787543029): 9 files, no impossibilities.
 
-# 29 files, no impossibilities in 2 directories.
+# 32 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 %.o: %.cpp
-#  recipe to execute (from 'Makefile', line 27):
+#  recipe to execute (from 'Makefile', line 28):
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
 # 1 implicit rules, 0 (0.0%) terminal.
@@ -273,48 +274,48 @@ src/init.cpp:
 src/Player.o: src/Player.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'src/Player'
-#  Last modified 2021-10-25 01:16:24.9185367
+#  Last modified 2021-10-31 18:24:13.1556959
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 27):
+#  recipe to execute (from 'Makefile', line 28):
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
 src/PickMap.o: src/PickMap.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'src/PickMap'
-#  Last modified 2021-10-25 01:16:26.6758981
+#  Last modified 2021-10-31 18:24:15.0702891
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 27):
+#  recipe to execute (from 'Makefile', line 28):
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
 src/init.o: src/init.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'src/init'
-#  Last modified 2021-10-25 01:16:27.8658015
+#  Last modified 2021-10-31 18:24:16.3613429
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 27):
+#  recipe to execute (from 'Makefile', line 28):
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
 # Not a target:
 src/tools.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-24 14:31:38.3531107
+#  Last modified 2021-10-27 19:48:21.9955986
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-24 22:53:08.6019782
+#  Last modified 2021-10-30 16:52:25.7617275
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
 src/main.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-25 01:08:56.8401007
+#  Last modified 2021-10-31 17:29:51.3315036
 #  File has been updated.
 #  Successfully updated.
 
@@ -323,7 +324,7 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 33):
+#  recipe to execute (from 'Makefile', line 34):
 	rm -f ${OBJ}
 
 # Not a target:
@@ -342,39 +343,38 @@ re: clean fclean bin/SteakOvergame.exe
 src/EventWindow.o: src/EventWindow.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'src/EventWindow'
-#  Last modified 2021-10-25 01:16:25.6982844
+#  Last modified 2021-10-31 18:24:13.9979041
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 27):
+#  recipe to execute (from 'Makefile', line 28):
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
 src/Pickable.o: src/Pickable.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'src/Pickable'
-#  Last modified 2021-10-25 01:16:27.1619892
+#  Last modified 2021-10-31 18:24:15.6113909
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 27):
+#  recipe to execute (from 'Makefile', line 28):
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
 src/main.o: src/main.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'src/main'
-#  Last modified 2021-10-25 01:16:22.2042052
+#  Last modified 2021-10-31 18:24:10.2010254
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 27):
+#  recipe to execute (from 'Makefile', line 28):
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
-bin/SteakOvergame.exe: src/main.o src/RenderWindow.o src/TileMap.o src/Player.o src/EventWindow.o src/tools.o src/PickMap.o src/Pickable.o src/init.o
+bin/SteakOvergame.exe: src/main.o src/RenderWindow.o src/TileMap.o src/Player.o src/EventWindow.o src/tools.o src/PickMap.o src/Pickable.o src/init.o src/EntityManager.o
 #  Implicit rule search has not been done.
-#  Last modified 2021-10-25 01:16:27.9888089
+#  Last modified 2021-10-31 18:25:05.5546095
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 24):
+#  recipe to execute (from 'Makefile', line 25):
 	${CXX} ${OBJ} -I${SDLINC} -I${INC} -L${SDLLIB} ${USELIB} -o ${NAME}
 
- 
 # Not a target:
 .DEFAULT:
 #  Implicit rule search has not been done.
@@ -389,12 +389,13 @@ all: bin/SteakOvergame.exe
 #  File has been updated.
 #  Successfully updated.
 
+ 
 fclean: clean
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 36):
+#  recipe to execute (from 'Makefile', line 37):
 	rm -f ${NAME}
 
 run: all
@@ -402,7 +403,7 @@ run: all
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 30):
+#  recipe to execute (from 'Makefile', line 31):
 	cd bin ; ./SteakOvergame.exe ; cd ..
 
 # Not a target:
@@ -415,33 +416,49 @@ src/EventWindow.cpp:
 src/tools.o: src/tools.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'src/tools'
-#  Last modified 2021-10-25 01:16:25.7573061
+#  Last modified 2021-10-31 18:24:14.1095049
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 27):
+#  recipe to execute (from 'Makefile', line 28):
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
 # Not a target:
 src/Player.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-24 13:08:16.8270426
+#  Last modified 2021-10-31 17:29:57.8717591
 #  File has been updated.
 #  Successfully updated.
+
+src/EntityManager.o: src/EntityManager.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'src/EntityManager'
+#  Last modified 2021-10-31 18:25:05.3934087
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 28):
+	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
 # Not a target:
 src/RenderWindow.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2021-10-25 01:06:41.5735349
+#  Last modified 2021-10-31 17:29:52.2376953
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/EntityManager.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2021-10-31 18:24:59.2965781
 #  File has been updated.
 #  Successfully updated.
 
 src/RenderWindow.o: src/RenderWindow.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'src/RenderWindow'
-#  Last modified 2021-10-25 01:16:23.1126006
+#  Last modified 2021-10-31 18:24:11.2351846
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 27):
+#  recipe to execute (from 'Makefile', line 28):
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
 .PHONY: clean fclean re all run
@@ -452,10 +469,10 @@ src/RenderWindow.o: src/RenderWindow.cpp
 src/TileMap.o: src/TileMap.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'src/TileMap'
-#  Last modified 2021-10-25 01:16:24.0376405
+#  Last modified 2021-10-31 18:24:12.1939523
 #  File has been updated.
 #  Successfully updated.
-#  recipe to execute (from 'Makefile', line 27):
+#  recipe to execute (from 'Makefile', line 28):
 	${CXX} -c ${CFLAGS} $< -I${SDLINC} -I${INC} -o $@
 
 # Not a target:
@@ -466,19 +483,19 @@ src/Pickable.cpp:
 #  Successfully updated.
 
 # files hash-table stats:
-# Load=28/1024=3%, Rehash=0, Collisions=0/87=0%
+# Load=30/1024=3%, Rehash=0, Collisions=0/93=0%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 65 / storage = 721 B / avg = 11 B
-# current buf: size = 8162 B / used = 721 B / count = 65 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 71 / storage = 838 B / avg = 11 B
+# current buf: size = 8162 B / used = 838 B / count = 71 / avg = 11 B
 
-# strcache performance: lookups = 101 / hit rate = 35%
+# strcache performance: lookups = 108 / hit rate = 34%
 # hash-table stats:
-# Load=65/8192=1%, Rehash=0, Collisions=0/101=0%
-# Finished Make data base on Mon Oct 25 01:16:41 2021
+# Load=71/8192=1%, Rehash=0, Collisions=0/108=0%
+# Finished Make data base on Sun Oct 31 18:45:08 2021
 
  
